@@ -12,9 +12,13 @@ const options: swaggerJSDoc.Options = {
     },
     servers: [
       {
+        url: process.env.RENDER_EXTERNAL_URL || `http://localhost:${process.env.PORT || 8080}`,
+        description: process.env.RENDER_EXTERNAL_URL ? '배포 서버' : '로컬 개발 서버',
+      },
+      ...(process.env.RENDER_EXTERNAL_URL ? [{
         url: `http://localhost:${process.env.PORT || 8080}`,
         description: '로컬 개발 서버',
-      },
+      }] : []),
     ],
     components: {
       securitySchemes: {
