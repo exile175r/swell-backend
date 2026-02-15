@@ -13,6 +13,8 @@ model User {
   bio       String?
   socialId  String?  @unique
   provider  String?  // google | kakao
+  ageVerified Boolean @default(false)
+  birthDate  String?  // YYYY-MM-DD
   createdAt DateTime @default(now())
   posts     Post[]
   comments  Comment[]

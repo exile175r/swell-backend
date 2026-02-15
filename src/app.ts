@@ -1,6 +1,7 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import authRoutes from './routes/auth.routes';
 import postRoutes from './routes/post.routes';
 import aiRoutes from './routes/ai.routes';
 import commentRoutes from './routes/comment.routes';
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/stt', aiRoutes);
 app.use('/api/comments', commentRoutes);

@@ -25,6 +25,11 @@ const options: swaggerJSDoc.Options = {
         },
       },
     },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
   },
   apis: ['./src/routes/*.ts', './src/controllers/*.ts'], // 라우트와 컨트롤러에서 문서를 추출합니다.
 };
