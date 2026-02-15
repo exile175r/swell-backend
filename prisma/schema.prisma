@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  nickname  String
+  bio       String?
+  socialId  String?  @unique
+  provider  String?  // google | kakao
+  createdAt DateTime @default(now())
+  posts     Post[]
+  comments  Comment[]
+  reactions Reaction[]
+  commentReactions CommentReaction[]
+  votes     Vote[]
+  following Follow[] @relation("Following")
+  followers Follow[] @relation("Followers")
+  notifications Notification[]
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  content   String   @db.Text
+  hasVote   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  comments  Comment[]
+  reactions Reaction[]
+  votes     Vote[]
+}
+
+model Comment {
+  id        Int       @id @default(autoincrement())
+  postId    Int
+  post      Post      @relation(fields: [postId], references: [id])
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+  parentId  Int?
+  parent    Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
+  replies   Comment[] @relation("CommentReplies")
+  content   String    @db.Text
+  createdAt DateTime  @default(now())
+  reactions CommentReaction[]
+}
+
+model Reaction {
+  id        Int      @id @default(autoincrement())
+  postId    Int
+  post      Post     @relation(fields: [postId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  type      String   // like | dislike
+  createdAt DateTime @default(now())
+
+  @@unique([postId, userId])
+}
+
+model CommentReaction {
+  id        Int      @id @default(autoincrement())
+  commentId Int
+  comment   Comment  @relation(fields: [commentId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  type      String   // like
+  createdAt DateTime @default(now())
+
+  @@unique([commentId, userId])
+}
+
+model Vote {
+  id        Int      @id @default(autoincrement())
+  postId    Int
+  post      Post     @relation(fields: [postId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  type      String   // agree | disagree
+  createdAt DateTime @default(now())
+
+  @@unique([postId, userId])
+}
+
+model Follow {
+  id          Int      @id @default(autoincrement())
+  followerId  String
+  follower    User     @relation("Following", fields: [followerId], references: [id])
+  followingId String
+  following   User     @relation("Followers", fields: [followingId], references: [id])
+  createdAt   DateTime @default(now())
+
+  @@unique([followerId, followingId])
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  type      String   // comment | reaction | follow
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
