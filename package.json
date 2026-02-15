@@ -5,8 +5,8 @@
   "scripts": {
     "start": "node dist/server.js",
     "dev": "npx tsx watch src/server.ts",
-    "build": "tsc",
-    "prisma:generate": "prisma generate",
+    "build": "npx prisma generate && tsc",
+    "prisma:generate": "npx prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "test": "jest"
   },
