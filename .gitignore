@@ -2,3 +2,5 @@ node_modules
 dist
 .env
 /generated/prisma
+@문서
+prototype
