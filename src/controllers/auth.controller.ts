@@ -1,20 +1,53 @@
+import axios from 'axios';
 import { Request, Response, NextFunction } from 'express';
 import prisma from '../services/prisma.service';
 import { generateToken } from '../utils/jwt.util';
 
 /**
  * 소셜 로그인 (또는 연동)
- * 프론트엔드에서 소셜 인증 후 받은 정보를 전달받음
+ * 프론트엔드에서 소셜 인증 후 받은 accessToken을 전달받음
  */
 export const socialLogin = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { socialId, provider, nickname, birthDate } = req.body;
+    const { provider, accessToken } = req.body;
+    let { socialId, nickname, birthDate } = req.body;
 
-    if (!socialId || !provider) {
-      return res.status(400).json({ message: 'socialId와 provider는 필수입니다.' });
+    if (!provider) {
+      return res.status(400).json({ message: 'provider는 필수입니다.' });
     }
 
-    // 1. 기존 사용자 조회 또는 생성 (Upsert)
+    // 1. 카카오인 경우 실시간 토큰 검증
+    if (provider === 'kakao') {
+      if (!accessToken) {
+        return res.status(400).json({ message: '카카오 로그인에는 accessToken이 필수입니다.' });
+      }
+
+      try {
+        const kakaoResponse = await axios.get('https://kapi.kakao.com/v2/user/me', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+          },
+        });
+
+        const kakaoData = kakaoResponse.data;
+        socialId = kakaoData.id.toString();
+        nickname = kakaoData.properties?.nickname || nickname;
+
+        // 카카오 계정 설정에 따라 생일 정보가 있을 수 있음 (optional)
+        if (kakaoData.kakao_account?.birthyear && kakaoData.kakao_account?.birthday) {
+          birthDate = `${kakaoData.kakao_account.birthyear}-${kakaoData.kakao_account.birthday.slice(0, 2)}-${kakaoData.kakao_account.birthday.slice(2)}`;
+        }
+      } catch (error) {
+        return res.status(401).json({ message: '유효하지 않은 카카오 토큰입니다.', error: (error as any).message });
+      }
+    }
+
+    if (!socialId) {
+      return res.status(400).json({ message: 'socialId를 확인할 수 없습니다.' });
+    }
+
+    // 2. 기존 사용자 조회 또는 생성 (Upsert)
     let user = await prisma.user.findUnique({
       where: { socialId }
     });
@@ -26,7 +59,7 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
           provider,
           nickname: nickname || `User_${Math.floor(Math.random() * 10000)}`,
           birthDate: birthDate || null,
-          ageVerified: false // 초기값
+          ageVerified: false
         }
       });
     }
