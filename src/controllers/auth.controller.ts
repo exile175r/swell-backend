@@ -1,7 +1,10 @@
 import axios from 'axios';
+import { OAuth2Client } from 'google-auth-library';
 import { Request, Response, NextFunction } from 'express';
 import prisma from '../services/prisma.service';
 import { generateToken } from '../utils/jwt.util';
+
+const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 /**
  * 소셜 로그인 (또는 연동)
@@ -40,6 +43,31 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
         }
       } catch (error) {
         return res.status(401).json({ message: '유효하지 않은 카카오 토큰입니다.', error: (error as any).message });
+      }
+    }
+
+    // 2. 구글인 경우 실시간 토큰 검증
+    if (provider === 'google') {
+      if (!accessToken) {
+        return res.status(400).json({ message: '구글 로그인에는 ID 토큰(accessToken)이 필수입니다.' });
+      }
+
+      try {
+        const ticket = await googleClient.verifyIdToken({
+          idToken: accessToken,
+          audience: process.env.GOOGLE_CLIENT_ID,
+        });
+
+        const payload = ticket.getPayload();
+        if (!payload) {
+          throw new Error('토큰 정보가 없습니다.');
+        }
+
+        socialId = payload.sub; // 구글 고유 ID
+        nickname = payload.name || nickname;
+        // 구글은 기본적으로 생년월일을 주지 않으므로, 요청 페이로드의 birthDate를 유지하거나 나중에 입력받음
+      } catch (error) {
+        return res.status(401).json({ message: '유효하지 않은 구글 토큰입니다.', error: (error as any).message });
       }
     }
 
