@@ -34,8 +34,8 @@ export const getPosts = async (req: Request, res: Response, next: NextFunction) 
     const skip = (Number(page) - 1) * Number(limit);
     const take = Number(limit);
 
-    // Current User ID (Prototype / Hardcoded until Auth)
-    const currentUserId = '00000000-0000-0000-0000-000000000000';
+    // Current User ID from JWT
+    const currentUserId = req.user?.userId;
 
     let where: any = {};
 
@@ -110,10 +110,12 @@ export const getPosts = async (req: Request, res: Response, next: NextFunction) 
  */
 export const createPost = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { content, hasVote, userId } = req.body;
+    const { content, hasVote } = req.body;
+    const effectiveUserId = req.user?.userId;
 
-    // Default userId for Prototype (until Auth is implemented)
-    const effectiveUserId = userId || '00000000-0000-0000-0000-000000000000';
+    if (!effectiveUserId) {
+      return res.status(401).json({ message: '인증되지 않은 사용자입니다.' });
+    }
 
     const post = await prisma.post.create({
       data: {

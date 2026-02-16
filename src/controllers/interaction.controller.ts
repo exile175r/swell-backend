@@ -32,10 +32,14 @@ import prisma from '../services/prisma.service';
 export const reactToPost = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
-    const { type, userId } = req.body; // type: 'like' | 'dislike'
+    const { type } = req.body; // type: 'like' | 'dislike'
 
     const postId = Number(id);
-    const effectiveUserId = userId || '00000000-0000-0000-0000-000000000000';
+    const effectiveUserId = req.user?.userId;
+
+    if (!effectiveUserId) {
+      return res.status(401).json({ message: '인증되지 않은 사용자입니다.' });
+    }
 
     // Upsert reaction (toggle logic can be added later)
     await prisma.reaction.upsert({
@@ -98,10 +102,14 @@ export const reactToPost = async (req: Request, res: Response, next: NextFunctio
 export const votePost = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
-    const { voteType, userId } = req.body; // voteType: 'agree' | 'disagree'
+    const { voteType } = req.body; // voteType: 'agree' | 'disagree'
 
     const postId = Number(id);
-    const effectiveUserId = userId || '00000000-0000-0000-0000-000000000000';
+    const effectiveUserId = req.user?.userId;
+
+    if (!effectiveUserId) {
+      return res.status(401).json({ message: '인증되지 않은 사용자입니다.' });
+    }
 
     await prisma.vote.upsert({
       where: {

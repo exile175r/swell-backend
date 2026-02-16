@@ -86,7 +86,16 @@ export const getProfile = async (req: Request, res: Response, next: NextFunction
  */
 export const followUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { followerId, followingId } = req.body;
+    const { followingId } = req.body;
+    const followerId = req.user?.userId;
+
+    if (!followerId) {
+      return res.status(401).json({ message: '인증되지 않은 사용자입니다.' });
+    }
+
+    if (followerId === followingId) {
+      return res.status(400).json({ message: '자기 자신을 팔로우할 수 없습니다.' });
+    }
 
     const existing = await prisma.follow.findUnique({
       where: { followerId_followingId: { followerId, followingId } }

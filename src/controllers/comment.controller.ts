@@ -34,10 +34,14 @@ import prisma from '../services/prisma.service';
 export const createComment = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id: postIdStr } = req.params;
-    const { content, userId, parentId } = req.body;
+    const { content, parentId } = req.body;
 
     const postId = Number(postIdStr);
-    const effectiveUserId = userId || '00000000-0000-0000-0000-000000000000';
+    const effectiveUserId = req.user?.userId;
+
+    if (!effectiveUserId) {
+      return res.status(401).json({ message: '인증되지 않은 사용자입니다.' });
+    }
 
     const comment = await prisma.comment.create({
       data: {
@@ -97,10 +101,12 @@ export const createComment = async (req: Request, res: Response, next: NextFunct
 export const likeComment = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
-    const { userId } = req.body;
-
     const commentId = Number(id);
-    const effectiveUserId = userId || '00000000-0000-0000-0000-000000000000';
+    const effectiveUserId = req.user?.userId;
+
+    if (!effectiveUserId) {
+      return res.status(401).json({ message: '인증되지 않은 사용자입니다.' });
+    }
 
     const existing = await prisma.commentReaction.findUnique({
       where: { commentId_userId: { commentId, userId: effectiveUserId } },
