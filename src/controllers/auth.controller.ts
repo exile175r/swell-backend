@@ -138,6 +138,7 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
     });
 
     res.status(200).json({
+      success: true,
       message: '로그인 성공',
       token,
       user
@@ -185,6 +186,7 @@ export const verifyAdultFree = async (req: Request, res: Response, next: NextFun
       });
 
       res.status(200).json({
+        success: true,
         message: '성인 인증 성공',
         token,
         user: updatedUser
