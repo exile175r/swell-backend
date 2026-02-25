@@ -30,14 +30,14 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
       let realToken = accessToken;
 
       try {
-        const apiKey = process.env.KAKAO_REST_API_KEY;
-        const clientSecret = process.env.KAKAO_CLIENT_SECRET;
+        const apiKey = process.env.KAKAO_REST_API_KEY?.trim();
+        const clientSecret = process.env.KAKAO_CLIENT_SECRET?.trim();
 
         if (!apiKey || !clientSecret) {
           console.error('[Auth] Kakao API Key or Client Secret is missing in Environment Variables');
           return res.status(500).json({
             success: false,
-            message: '서버 환경 설정(Kakao API Key/Secret)이 누락되었습니다. 관리자에게 문의하세요.',
+            message: '서버 환경 설정(Kakao API Key/Secret)이 누락되었습니다.',
             details: { apiKey: !!apiKey, clientSecret: !!clientSecret }
           });
         }
@@ -101,8 +101,8 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
       let idToken = accessToken;
 
       try {
-        const clientId = process.env.GOOGLE_CLIENT_ID;
-        const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+        const clientId = process.env.GOOGLE_CLIENT_ID?.trim();
+        const clientSecret = process.env.GOOGLE_CLIENT_SECRET?.trim();
 
         if (!clientId || !clientSecret) {
           console.error('[Auth] Google Client ID or Secret is missing in Environment Variables');
