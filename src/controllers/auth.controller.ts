@@ -141,7 +141,12 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
       success: true,
       message: '로그인 성공',
       token,
-      user
+      user: {
+        id: user.id,
+        nickname: user.nickname,
+        status: user.membership || 'USER',
+        ageVerified: user.ageVerified
+      }
     });
   } catch (error) {
     next(error);
