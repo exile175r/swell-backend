@@ -73,7 +73,28 @@ router.post('/verify-adult', authenticate, authController.verifyAdultFree);
 router.get('/callback', (req, res) => {
   const queryParams = new URLSearchParams(req.query as any).toString();
   const deepLink = `swell://oauth?${queryParams}`;
-  res.redirect(deepLink);
+
+  // 단순 302 대신 HTML 기반 리다이렉트로 더 확실하게 앱 실행 유도
+  res.send(`
+    <html>
+      <head>
+        <title>Redirecting to Swell...</title>
+        <meta http-equiv="refresh" content="0;url=${deepLink}">
+        <script>
+          window.location.href = "${deepLink}";
+          setTimeout(function() {
+            window.close();
+          }, 1000);
+        </script>
+      </head>
+      <body style="background-color: #001220; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif;">
+        <div style="text-align: center;">
+          <h2>Swell 앱으로 돌아가는 중...</h2>
+          <p>자동으로 이동하지 않으면 <a href="${deepLink}" style="color: #00ccff;">여기를 클릭</a>하세요.</p>
+        </div>
+      </body>
+    </html>
+  `);
 });
 
 export default router;

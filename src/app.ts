@@ -2,6 +2,7 @@ import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.routes';
+import prisma from './services/prisma.service';
 import postRoutes from './routes/post.routes';
 import aiRoutes from './routes/ai.routes';
 import commentRoutes from './routes/comment.routes';
@@ -41,6 +42,24 @@ app.use('/api/notifications', notificationRoutes);
 // Basic Health Check
 app.get('/health', (req: Request, res: Response) => {
   res.status(200).json({ status: 'OK', message: 'Swell API is running' });
+});
+
+// DB Connection Test
+app.get('/api/test-db', async (req: Request, res: Response) => {
+  try {
+    const userCount = await prisma.user.count();
+    res.status(200).json({
+      success: true,
+      message: 'Database Connection is OK!',
+      userCount
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: 'Database Connection Failed!',
+      error: error.message
+    });
+  }
 });
 
 // Error Handling Middleware
