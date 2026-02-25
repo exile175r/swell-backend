@@ -30,13 +30,14 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
       let realToken = accessToken;
 
       try {
-        console.log('[Auth] Exchanging Kakao Code for Token...');
+        const targetRedirectUri = req.body.redirectUri || 'https://swell-backend.onrender.com/api/auth/callback';
+        console.log(`[Auth] Exchanging Kakao Code for Token. Code: ${accessToken.substring(0, 10)}..., RedirectURI: ${targetRedirectUri}`);
         const tokenResponse = await axios.post('https://kauth.kakao.com/oauth/token', null, {
           params: {
             grant_type: 'authorization_code',
             client_id: process.env.KAKAO_REST_API_KEY,
             client_secret: process.env.KAKAO_CLIENT_SECRET,
-            redirect_uri: req.body.redirectUri || 'https://swell-backend.onrender.com/api/auth/callback',
+            redirect_uri: targetRedirectUri,
             code: accessToken,
           },
           headers: {
