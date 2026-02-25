@@ -41,7 +41,8 @@ const LoginScreen = ({ navigation }: any) => {
       clientId: process.env.EXPO_PUBLIC_KAKAO_CLIENT_ID || "",
       scopes: ["profile_nickname"],
       redirectUri,
-      responseType: AuthSession.ResponseType.Code, // Token -> Code로 변경
+      responseType: AuthSession.ResponseType.Code,
+      usePKCE: true,
     },
     { authorizationEndpoint: "https://kauth.kakao.com/oauth/authorize" }
   );
@@ -52,12 +53,29 @@ const LoginScreen = ({ navigation }: any) => {
       clientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID || "",
       scopes: ["profile", "email"],
       redirectUri,
-      responseType: AuthSession.ResponseType.Code, // IdToken -> Code로 변경
+      responseType: AuthSession.ResponseType.Code,
+      usePKCE: true,
     },
     { authorizationEndpoint: "https://accounts.google.com/o/oauth2/v2/auth" }
   );
 
+  const googleVerifierRef = React.useRef<string | null>(null);
+  const kakaoVerifierRef = React.useRef<string | null>(null);
   const activePlatformRef = React.useRef<string | null>(null);
+
+  useEffect(() => {
+    if (kakaoRequest?.codeVerifier) {
+      kakaoVerifierRef.current = kakaoRequest.codeVerifier;
+      console.log("[Auth] Kakao Code Verifier Captured");
+    }
+  }, [kakaoRequest]);
+
+  useEffect(() => {
+    if (googleRequest?.codeVerifier) {
+      googleVerifierRef.current = googleRequest.codeVerifier;
+      console.log("[Auth] Google Code Verifier Captured");
+    }
+  }, [googleRequest]);
 
   // 1. 딥링크 직접 수신 리스너 (보험용)
   useEffect(() => {
@@ -78,9 +96,9 @@ const LoginScreen = ({ navigation }: any) => {
           if (params.code) {
             console.log("[Auth] Code found in deep link, processing...");
             const provider = activePlatformRef.current || (url.includes("google") ? "google" : "kakao");
-            // 딥링크 수동 수신 시에도 세션에 저장된 codeVerifier를 찾아 전달
-            const codeVerifier = provider === "kakao" ? kakaoRequest?.codeVerifier : googleRequest?.codeVerifier;
-            handleAuthComplete(provider, params.code, codeVerifier);
+            // Ref에서 직접 추출 (상태 지연 방지)
+            const verifier = provider === "kakao" ? kakaoVerifierRef.current : googleVerifierRef.current;
+            handleAuthComplete(provider, params.code, verifier || undefined);
           }
         }
       }
@@ -101,7 +119,7 @@ const LoginScreen = ({ navigation }: any) => {
 
   useEffect(() => {
     if (kakaoResponse?.type === "success" && kakaoResponse.params.code) {
-      handleAuthComplete("kakao", kakaoResponse.params.code, kakaoRequest?.codeVerifier);
+      handleAuthComplete("kakao", kakaoResponse.params.code, kakaoVerifierRef.current || undefined);
     } else if (kakaoResponse?.type === "error") {
       console.log("[Kakao Auth Error]", kakaoResponse.error);
       Alert.alert("로그인 실패", kakaoResponse.error?.message || "카카오 로그인에 실패했습니다.");
@@ -110,7 +128,7 @@ const LoginScreen = ({ navigation }: any) => {
 
   useEffect(() => {
     if (googleResponse?.type === "success" && googleResponse.params.code) {
-      handleAuthComplete("google", googleResponse.params.code, googleRequest?.codeVerifier);
+      handleAuthComplete("google", googleResponse.params.code, googleVerifierRef.current || undefined);
     } else if (googleResponse?.type === "error") {
       console.log("[Google Auth Error]", googleResponse.error);
       Alert.alert("로그인 실패", googleResponse.error?.message || "Google 로그인에 실패했습니다.");
