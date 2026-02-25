@@ -1,0 +1,178 @@
+﻿env: load .env
+env: export EXPO_PUBLIC_API_URL EXPO_PUBLIC_FASTAPI_URL KAKAO_CLIENT_ID KAKAO_CLIENT_SECRET EXPO_PUBLIC_KAKAO_CLIENT_ID REACT_APP_KAKAO_CLIENT_ID REACT_APP_KAKAO_MAP_API_KEY GOOGLE_CLIENT_ID GOOGLE_CLIENT_SECRET EXPO_PUBLIC_GOOGLE_CLIENT_ID REACT_APP_GOOGLE_CLIENT_ID
+Starting Metro Bundler
+Android Bundling failed 1537ms index.ts (1 module)
+node.exe : SyntaxError: index.ts: [BABEL] C:\Users\choi9\OneDr
+ive\Desktop\Swell\frontend\index.ts: Cannot find module 'react
+-native-worklets/plugin'
+위치 줄:1 문자:1
++ & "C:\/node.exe" "C:\/node_modules/npm/bin/npx-cli.js" expo 
+export:em ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (SyntaxError: in. 
+   ..orklets/plugin':String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Require stack:
+- C:\Users\choi9\OneDrive\Desktop\Swell\frontend\node_modules\
+@babel\core\lib\config\files\plugins.js
+- C:\Users\choi9\OneDrive\Desktop\Swell\frontend\node_modules\
+@babel\core\lib\config\files\index.js
+- C:\Users\choi9\OneDrive\Desktop\Swell\frontend\node_modules\
+@babel\core\lib\index.js
+- C:\Users\choi9\OneDrive\Desktop\Swell\frontend\node_modules\
+metro-transform-worker\src\index.js
+- C:\Users\choi9\OneDrive\Desktop\Swell\frontend\node_modules\
+react-native-css-interop\dist\metro\transformer.js
+- C:\Users\choi9\OneDrive\Desktop\Swell\frontend\node_modules\
+metro\src\DeltaBundler\Worker.flow.js
+- C:\Users\choi9\OneDrive\Desktop\Swell\frontend\node_modules\
+metro\src\DeltaBundler\Worker.js
+- C:\Users\choi9\OneDrive\Desktop\Swell\frontend\node_modules\
+jest-worker\build\workers\processChild.js
+
+Make sure that all the Babel plugins and presets you are using
+are defined as dependencies or devDependencies in your package
+.json
+file. It's possible that the missing plugin is loaded by a pre
+set
+you are using that forgot to add the plugin to its dependencie
+s: you
+can workaround this problem by explicitly adding the missing p
+ackage
+to your top-level package.json.
+
+Error: [BABEL] C:\Users\choi9\OneDrive\Desktop\Swell\frontend\
+index.ts: Cannot find module 'react-native-worklets/plugin'
+Require stack:
+- C:\Users\choi9\OneDrive\Desktop\Swell\frontend\node_modules\
+@babel\core\lib\config\files\plugins.js
+- C:\Users\choi9\OneDrive\Desktop\Swell\frontend\node_modules\
+@babel\core\lib\config\files\index.js
+- C:\Users\choi9\OneDrive\Desktop\Swell\frontend\node_modules\
+@babel\core\lib\index.js
+- C:\Users\choi9\OneDrive\Desktop\Swell\frontend\node_modules\
+metro-transform-worker\src\index.js
+- C:\Users\choi9\OneDrive\Desktop\Swell\frontend\node_modules\
+react-native-css-interop\dist\metro\transformer.js
+- C:\Users\choi9\OneDrive\Desktop\Swell\frontend\node_modules\
+metro\src\DeltaBundler\Worker.flow.js
+- C:\Users\choi9\OneDrive\Desktop\Swell\frontend\node_modules\
+metro\src\DeltaBundler\Worker.js
+- C:\Users\choi9\OneDrive\Desktop\Swell\frontend\node_modules\
+jest-worker\build\workers\processChild.js
+
+Make sure that all the Babel plugins and presets you are using
+are defined as dependencies or devDependencies in your package
+.json
+file. It's possible that the missing plugin is loaded by a pre
+set
+you are using that forgot to add the plugin to its dependencie
+s: you
+can workaround this problem by explicitly adding the missing p
+ackage
+to your top-level package.json.
+
+    at Function._resolveFilename (node:internal/modules/cjs/lo
+ader:1383:15)
+    at resolve (node:internal/modules/helpers:157:19)
+    at tryRequireResolve (C:\Users\choi9\OneDrive\Desktop\Swel
+l\frontend\node_modules\@babel\core\lib\config\files\plugins.j
+s:128:11)
+    at resolveStandardizedNameForRequire (C:\Users\choi9\OneDr
+ive\Desktop\Swell\frontend\node_modules\@babel\core\lib\config
+\files\plugins.js:162:19)
+    at resolveStandardizedName (C:\Users\choi9\OneDrive\Deskto
+p\Swell\frontend\node_modules\@babel\core\lib\config\files\plu
+gins.js:183:12)
+    at loadPlugin (C:\Users\choi9\OneDrive\Desktop\Swell\front
+end\node_modules\@babel\core\lib\config\files\plugins.js:56:7)
+    at loadPlugin.next (<anonymous>)
+    at createDescriptor (C:\Users\choi9\OneDrive\Desktop\Swell
+\frontend\node_modules\@babel\core\lib\config\config-descripto
+rs.js:140:16)
+    at createDescriptor.next (<anonymous>)
+    at evaluateSync (C:\Users\choi9\OneDrive\Desktop\Swell\fro
+ntend\node_modules\gensync\index.js:251:28)
+    at C:\Users\choi9\OneDrive\Desktop\Swell\frontend\node_mod
+ules\gensync\index.js:31:34
+    at Array.map (<anonymous>)
+    at Function.sync (C:\Users\choi9\OneDrive\Desktop\Swell\fr
+ontend\node_modules\gensync\index.js:31:22)
+    at Function.all (C:\Users\choi9\OneDrive\Desktop\Swell\fro
+ntend\node_modules\gensync\index.js:210:24)
+    at Generator.next (<anonymous>)
+    at createDescriptors (C:\Users\choi9\OneDrive\Desktop\Swel
+l\frontend\node_modules\@babel\core\lib\config\config-descript
+ors.js:102:41)
+    at createDescriptors.next (<anonymous>)
+    at createPluginDescriptors (C:\Users\choi9\OneDrive\Deskto
+p\Swell\frontend\node_modules\@babel\core\lib\config\config-de
+scriptors.js:99:17)
+    at createPluginDescriptors.next (<anonymous>)
+    at C:\Users\choi9\OneDrive\Desktop\Swell\frontend\node_mod
+ules\@babel\core\lib\gensync-utils\functional.js:22:27
+    at Generator.next (<anonymous>)
+    at mergeChainOpts (C:\Users\choi9\OneDrive\Desktop\Swell\f
+rontend\node_modules\@babel\core\lib\config\config-chain.js:34
+9:34)
+    at mergeChainOpts.next (<anonymous>)
+    at chainWalker (C:\Users\choi9\OneDrive\Desktop\Swell\fron
+tend\node_modules\@babel\core\lib\config\config-chain.js:316:1
+4)
+    at chainWalker.next (<anonymous>)
+    at buildPresetChain (C:\Users\choi9\OneDrive\Desktop\Swell
+\frontend\node_modules\@babel\core\lib\config\config-chain.js:
+33:24)
+    at buildPresetChain.next (<anonymous>)
+    at loadPresetDescriptor (C:\Users\choi9\OneDrive\Desktop\S
+well\frontend\node_modules\@babel\core\lib\config\full.js:295:
+53)
+    at loadPresetDescriptor.next (<anonymous>)
+    at recursePresetDescriptors (C:\Users\choi9\OneDrive\Deskt
+op\Swell\frontend\node_modules\@babel\core\lib\config\full.js:
+77:31)
+    at recursePresetDescriptors.next (<anonymous>)
+    at C:\Users\choi9\OneDrive\Desktop\Swell\frontend\node_mod
+ules\@babel\core\lib\config\full.js:156:21
+    at Generator.next (<anonymous>)
+    at loadFullConfig (C:\Users\choi9\OneDrive\Desktop\Swell\f
+rontend\node_modules\@babel\core\lib\config\full.js:113:5)
+    at loadFullConfig.next (<anonymous>)
+    at transform (C:\Users\choi9\OneDrive\Desktop\Swell\fronte
+nd\node_modules\@babel\core\lib\transform.js:20:44)
+    at transform.next (<anonymous>)
+    at evaluateSync (C:\Users\choi9\OneDrive\Desktop\Swell\fro
+ntend\node_modules\gensync\index.js:251:28)
+    at sync (C:\Users\choi9\OneDrive\Desktop\Swell\frontend\no
+de_modules\gensync\index.js:89:14)
+    at stopHiding - secret - don't use this - v1 (C:\Users\cho
+i9\OneDrive\Desktop\Swell\frontend\node_modules\@babel\core\li
+b\errors\rewrite-stack-trace.js:47:12)
+    at Object.transformSync (C:\Users\choi9\OneDrive\Desktop\S
+well\frontend\node_modules\@babel\core\lib\transform.js:40:76)
+    at parseWithBabel (C:\Users\choi9\OneDrive\Desktop\Swell\f
+rontend\node_modules\@expo\metro-config\build\transformSync.js
+:65:18)
+    at transformSync (C:\Users\choi9\OneDrive\Desktop\Swell\fr
+ontend\node_modules\@expo\metro-config\build\transformSync.js:
+44:16)
+    at Object.transform (C:\Users\choi9\OneDrive\Desktop\Swell
+\frontend\node_modules\@expo\metro-config\build\babel-transfor
+mer.js:115:58)
+    at transformJSWithBabel (C:\Users\choi9\OneDrive\Desktop\S
+well\frontend\node_modules\@expo\metro-config\build\transform-
+worker\metro-transform-worker.js:440:47)
+    at Object.transform (C:\Users\choi9\OneDrive\Desktop\Swell
+\frontend\node_modules\@expo\metro-config\build\transform-work
+er\metro-transform-worker.js:549:12)
+    at transform (C:\Users\choi9\OneDrive\Desktop\Swell\fronte
+nd\node_modules\@expo\metro-config\build\transform-worker\tran
+sform-worker.js:117:23)
+    at Object.transform (C:\Users\choi9\OneDrive\Desktop\Swell
+\frontend\node_modules\react-native-css-interop\dist\metro\tra
+nsformer.js:15:16)
+    at transformFile (C:\Users\choi9\OneDrive\Desktop\Swell\fr
+ontend\node_modules\metro\src\DeltaBundler\Worker.flow.js:54:3
+6)

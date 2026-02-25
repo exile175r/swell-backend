@@ -1,0 +1,7 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true
+  },
+  "exclude": ["swagger_init.js", "swagger_init_utf8.js", "node_modules"]
+}

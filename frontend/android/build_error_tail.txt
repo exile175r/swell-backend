@@ -1,0 +1,500 @@
+﻿> Task :react-native-async-storage_async-storage:prepareReleaseArtProfile UP-TO-DATE
+> Task :react-native-async-storage_async-storage:mergeReleaseJavaResource
+> Task :react-native-reanimated:configureCMakeRelWithDebInfo[arm64-v8a]
+> Task :expo-modules-core:compileReleaseJavaWithJavac
+> Task :expo-modules-core:processReleaseJavaRes
+> Task :expo-modules-core:generateReleaseLintModel
+> Task :react-native-async-storage_async-storage:syncReleaseLibJars
+> Task :react-native-async-storage_async-storage:bundleReleaseLocalLintAar
+> Task :expo-modules-core:bundleLibRuntimeToJarRelease
+> Task :expo-modules-core:bundleLibCompileToJarRelease
+> Task :react-native-reanimated:buildCMakeRelWithDebInfo[arm64-v8a]
+> Task :expo-dev-client:compileReleaseKotlin NO-SOURCE
+> Task :expo-asset:compileReleaseKotlin
+> Task :expo-constants:compileReleaseKotlin
+> Task :expo-application:compileReleaseKotlin
+> Task :expo-crypto:compileReleaseKotlin
+> Task :expo-dev-client:compileReleaseJavaWithJavac
+> Task :expo-application:compileReleaseJavaWithJavac
+> Task :expo-application:bundleLibCompileToJarRelease
+> Task :expo-asset:compileReleaseJavaWithJavac
+> Task :expo-asset:bundleLibCompileToJarRelease
+> Task :expo-constants:compileReleaseJavaWithJavac
+> Task :expo-constants:bundleLibCompileToJarRelease
+> Task :expo-crypto:compileReleaseJavaWithJavac
+> Task :expo-dev-client:bundleLibCompileToJarRelease
+> Task :expo-crypto:bundleLibCompileToJarRelease
+> Task :expo-json-utils:compileReleaseKotlin
+> Task :expo-updates-interface:compileReleaseKotlin
+> Task :expo-dev-menu-interface:compileReleaseKotlin
+> Task :expo-json-utils:compileReleaseJavaWithJavac
+> Task :expo-keep-awake:compileReleaseKotlin
+> Task :expo-dev-menu-interface:compileReleaseJavaWithJavac
+> Task :expo-dev-menu-interface:bundleLibCompileToJarRelease
+> Task :expo-json-utils:bundleLibCompileToJarRelease
+> Task :expo-font:compileReleaseKotlin
+> Task :expo-linking:compileReleaseKotlin
+> Task :expo-updates-interface:compileReleaseJavaWithJavac
+> Task :expo-updates-interface:bundleLibCompileToJarRelease
+> Task :expo-font:compileReleaseJavaWithJavac
+> Task :expo-font:bundleLibCompileToJarRelease
+> Task :expo-keep-awake:compileReleaseJavaWithJavac
+> Task :expo-keep-awake:bundleLibCompileToJarRelease
+> Task :expo-file-system:compileReleaseKotlin
+> Task :expo-linking:compileReleaseJavaWithJavac
+
+> Task :expo-manifests:compileReleaseKotlin
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-manifests/android/src/main/java/expo/modules/manifests/core/EmbeddedManifest.kt:19:16 This declaration overrides deprecated member but not marked as deprecated itself. Please add @Deprecated annotation or suppress. See https://youtrack.jetbrains.com/issue/KT-47902 for details
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-manifests/android/src/main/java/expo/modules/manifests/core/EmbeddedManifest.kt:19:86 'getLegacyID(): String' is deprecated. Prefer scopeKey or projectId depending on use case
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-manifests/android/src/main/java/expo/modules/manifests/core/ExpoUpdatesManifest.kt:16:16 This declaration overrides deprecated member but not marked as deprecated itself. Please add @Deprecated annotation or suppress. See https://youtrack.jetbrains.com/issue/KT-47902 for details
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-manifests/android/src/main/java/expo/modules/manifests/core/Manifest.kt:15:12 'getRawJson(): JSONObject' is deprecated. Prefer to use specific field getters
+
+> Task :expo-file-system:compileReleaseJavaWithJavac
+> Task :expo-manifests:compileReleaseJavaWithJavac
+> Task :expo-manifests:bundleLibCompileToJarRelease
+> Task :expo-linking:bundleLibCompileToJarRelease
+> Task :expo-file-system:bundleLibCompileToJarRelease
+> Task :expo-application:bundleLibRuntimeToJarRelease
+> Task :expo-application:processReleaseJavaRes
+> Task :expo-application:createFullJarRelease
+> Task :expo-modules-core:createFullJarRelease
+> Task :expo-application:generateReleaseLintModel
+> Task :expo-asset:bundleLibRuntimeToJarRelease
+> Task :expo-asset:processReleaseJavaRes
+> Task :expo-asset:createFullJarRelease
+> Task :expo-asset:generateReleaseLintModel
+> Task :expo-constants:bundleLibRuntimeToJarRelease
+> Task :expo-constants:processReleaseJavaRes
+> Task :expo-constants:createFullJarRelease
+> Task :expo-constants:generateReleaseLintModel
+> Task :expo-crypto:bundleLibRuntimeToJarRelease
+> Task :expo-crypto:processReleaseJavaRes
+> Task :expo-crypto:createFullJarRelease
+> Task :expo-crypto:generateReleaseLintModel
+> Task :expo-dev-client:processReleaseJavaRes NO-SOURCE
+> Task :expo-dev-client:bundleLibRuntimeToJarRelease
+> Task :expo-dev-client:generateReleaseLintModel
+> Task :expo-dev-client:createFullJarRelease
+> Task :expo-dev-menu-interface:processReleaseJavaRes
+> Task :expo-dev-menu-interface:bundleLibRuntimeToJarRelease
+> Task :expo-system-ui:compileReleaseKotlin
+> Task :expo-dev-menu-interface:generateReleaseLintModel
+
+> Task :expo-web-browser:compileReleaseKotlin
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-web-browser/android/src/main/java/expo/modules/webbrowser/WebBrowserModule.kt:112:15 'setToolbarColor(Int): CustomTabsIntent.Builder' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-web-browser/android/src/main/java/expo/modules/webbrowser/WebBrowserModule.kt:117:15 'setSecondaryToolbarColor(Int): CustomTabsIntent.Builder' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-web-browser/android/src/main/java/expo/modules/webbrowser/WebBrowserModule.kt:123:15 'addDefaultShareMenuItem(): CustomTabsIntent.Builder' is deprecated. Deprecated in Java
+
+> Task :expo-system-ui:compileReleaseJavaWithJavac
+> Task :expo-system-ui:bundleLibCompileToJarRelease
+> Task :expo-web-browser:compileReleaseJavaWithJavac
+> Task :expo-dev-menu-interface:createFullJarRelease
+> Task :expo-web-browser:bundleLibCompileToJarRelease
+> Task :expo-json-utils:bundleLibRuntimeToJarRelease
+> Task :expo-json-utils:processReleaseJavaRes
+> Task :expo-json-utils:createFullJarRelease
+> Task :expo-json-utils:generateReleaseLintModel
+> Task :expo-manifests:bundleLibRuntimeToJarRelease
+> Task :expo-manifests:processReleaseJavaRes
+> Task :expo-manifests:createFullJarRelease
+> Task :expo-manifests:generateReleaseLintModel
+> Task :expo-updates-interface:bundleLibRuntimeToJarRelease
+> Task :expo-updates-interface:processReleaseJavaRes
+> Task :expo-updates-interface:createFullJarRelease
+> Task :expo-updates-interface:generateReleaseLintModel
+> Task :expo-file-system:processReleaseJavaRes
+> Task :expo-file-system:bundleLibRuntimeToJarRelease
+> Task :expo-file-system:generateReleaseLintModel
+> Task :expo-file-system:createFullJarRelease
+> Task :expo-font:bundleLibRuntimeToJarRelease
+> Task :expo-font:processReleaseJavaRes
+> Task :expo-font:createFullJarRelease
+> Task :expo-font:generateReleaseLintModel
+> Task :expo-keep-awake:bundleLibRuntimeToJarRelease
+> Task :expo-keep-awake:processReleaseJavaRes
+> Task :expo-keep-awake:createFullJarRelease
+> Task :expo-keep-awake:generateReleaseLintModel
+> Task :expo-linking:bundleLibRuntimeToJarRelease
+> Task :expo-linking:processReleaseJavaRes
+> Task :expo-linking:createFullJarRelease
+> Task :expo-linking:generateReleaseLintModel
+> Task :expo-system-ui:bundleLibRuntimeToJarRelease
+> Task :expo-system-ui:processReleaseJavaRes
+> Task :expo-system-ui:createFullJarRelease
+> Task :expo-system-ui:generateReleaseLintModel
+> Task :expo-web-browser:bundleLibRuntimeToJarRelease
+> Task :expo-web-browser:processReleaseJavaRes
+> Task :expo-web-browser:createFullJarRelease
+> Task :expo-web-browser:generateReleaseLintModel
+
+> Task :expo-dev-menu:compileReleaseKotlin
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-menu/android/src/main/java/com/facebook/react/devsupport/DevMenuSettingsBase.kt:6:27 'PreferenceManager' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-menu/android/src/main/java/com/facebook/react/devsupport/DevMenuSettingsBase.kt:18:51 'PreferenceManager' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-menu/android/src/main/java/com/facebook/react/devsupport/DevMenuSettingsBase.kt:18:69 'getDefaultSharedPreferences(Context!): SharedPreferences!' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-menu/android/src/main/java/com/facebook/react/devsupport/DevMenuSettingsBase.kt:56:16 This declaration overrides deprecated member but not marked as deprecated itself. Please add @Deprecated annotation or suppress. See https://youtrack.jetbrains.com/issue/KT-47902 for details
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-menu/android/src/main/java/expo/modules/devmenu/fab/MovableFloatingActionButton.kt:173:17 'computeBounds(RectF, Boolean): Unit' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-menu/android/src/main/java/expo/modules/devmenu/helpers/DevMenuOkHttpExtension.kt:58:19 'create(MediaType?, String): RequestBody' is deprecated. Moved to extension function. Put the 'content' argument first to fix Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-menu/android/src/main/java/expo/modules/devmenu/modules/DevMenuModule.kt:33:44 Elvis operator (?:) always returns the left operand of non-nullable type ReadableMap
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-menu/android/src/react-native-74/main/expo/modules/devmenu/react/DevMenuPackagerConnectionSettings.kt:16:9 Parameter 'host' is never used
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-menu/android/src/release/java/expo/modules/devmenu/DevMenuManager.kt:40:42 Returning type parameter has been inferred to Nothing implicitly. Please specify type arguments explicitly to hide this warning. Nothing can produce an exception at runtime.
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-menu/android/src/release/java/expo/modules/devmenu/DevMenuManager.kt:82:43 The corresponding parameter in the supertype 'DevMenuManagerInterface' is named 'shouldAutoLaunch'. This may cause problems when calling this function with named arguments.
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-menu/android/src/release/java/expo/modules/devmenu/DevMenuManager.kt:94:17 Parameter 'context' is never used
+
+> Task :react-native-reanimated:configureCMakeRelWithDebInfo[armeabi-v7a]
+C/C++: CMake Warning in src/main/cpp/reanimated/CMakeLists.txt:
+C/C++:   The object file directory
+C/C++:     D:/document/project/Swell-client/frontend/node_modules/react-native-reanimated/android/.cxx/RelWithDebInfo/ti6u21w6/armeabi-v7a/src/main/cpp/reanimated/CMakeFiles/reanimated.dir/./
+C/C++:   has 180 characters.  The maximum full path to an object file is 250
+C/C++:   characters (see CMAKE_OBJECT_PATH_MAX).  Object file
+C/C++:     D_/document/project/Swell-client/frontend/node_modules/react-native-reanimated/Common/cpp/reanimated/RuntimeDecorators/ReanimatedWorkletRuntimeDecorator.cpp.o
+C/C++:   cannot be safely placed under this directory.  The build may not work
+C/C++:   correctly.
+
+> Task :expo-dev-menu:compileReleaseJavaWithJavac
+> Task :expo-dev-menu:bundleLibCompileToJarRelease
+> Task :expo-dev-menu:bundleLibRuntimeToJarRelease
+> Task :expo-dev-menu:processReleaseJavaRes
+> Task :expo-dev-menu:createFullJarRelease
+> Task :expo-dev-menu:generateReleaseLintModel
+
+> Task :expo-dev-launcher:compileReleaseKotlin
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/helpers/DevLauncherUpdatesHelper.kt:16:3 Parameter 'context' is never used
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/DevLauncherRecentlyOpenedAppsRegistry.kt:32:47 Unchecked cast: MutableMap<Any?, Any?> to MutableMap<String, Any>
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/DevLauncherRecentlyOpenedAppsRegistry.kt:50:27 'getRawJson(): JSONObject' is deprecated. Prefer to use specific field getters
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:37:23 'constructor TaskDescription(String!, Bitmap!, Int)' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:63:61 'FLAG_TRANSLUCENT_STATUS: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:90:33 Variable 'appliedStatusBarStyle' initializer is redundant
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:92:45 'getter for systemUiVisibility: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:95:68 'SYSTEM_UI_FLAG_LIGHT_STATUS_BAR: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:99:67 'SYSTEM_UI_FLAG_LIGHT_STATUS_BAR: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:103:67 'SYSTEM_UI_FLAG_LIGHT_STATUS_BAR: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:107:15 'setter for systemUiVisibility: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:115:59 'FLAG_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:116:61 'FLAG_FORCE_NOT_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:118:59 'FLAG_FORCE_NOT_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:119:61 'FLAG_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:131:23 'replaceSystemWindowInsets(Int, Int, Int, Int): WindowInsets' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:132:25 'getter for systemWindowInsetLeft: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:134:25 'getter for systemWindowInsetRight: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:135:25 'getter for systemWindowInsetBottom: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:150:15 'setter for statusBarColor: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:160:63 'FLAG_TRANSLUCENT_NAVIGATION: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:161:25 'setter for navigationBarColor: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:171:63 'FLAG_TRANSLUCENT_NAVIGATION: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:175:33 'getter for systemUiVisibility: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:176:33 'SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:177:21 'setter for systemUiVisibility: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:190:29 'getter for systemUiVisibility: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:191:62 'SYSTEM_UI_FLAG_HIDE_NAVIGATION: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:191:101 'SYSTEM_UI_FLAG_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:192:63 'SYSTEM_UI_FLAG_HIDE_NAVIGATION: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:192:102 'SYSTEM_UI_FLAG_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:192:136 'SYSTEM_UI_FLAG_IMMERSIVE: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:193:70 'SYSTEM_UI_FLAG_HIDE_NAVIGATION: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:193:109 'SYSTEM_UI_FLAG_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:193:143 'SYSTEM_UI_FLAG_IMMERSIVE_STICKY: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/launcher/configurators/DevLauncherExpoActivityConfigurator.kt:196:17 'setter for systemUiVisibility: Int' is deprecated. Deprecated in Java
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/main/java/expo/modules/devlauncher/react/DevLauncherPackagerConnectionSettings.kt:12:9 Parameter 'value' is never used
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/release/java/expo/modules/devlauncher/DevLauncherController.kt:102:29 Parameter 'context' is never used
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/release/java/expo/modules/devlauncher/DevLauncherController.kt:102:47 Parameter 'reactHost' is never used
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/release/java/expo/modules/devlauncher/DevLauncherController.kt:108:67 Parameter 'launcherClass' is never used
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/release/java/expo/modules/devlauncher/DevLauncherController.kt:113:56 Parameter 'additionalPackages' is never used
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/release/java/expo/modules/devlauncher/DevLauncherController.kt:113:93 Parameter 'launcherClass' is never used
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/release/java/expo/modules/devlauncher/DevLauncherController.kt:118:35 Parameter 'reactActivity' is never used
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/release/java/expo/modules/devlauncher/DevLauncherController.kt:123:27 Parameter 'reactActivity' is never used
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/release/java/expo/modules/devlauncher/DevLauncherController.kt:123:57 Parameter 'intent' is never used
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/release/java/expo/modules/devlauncher/DevLauncherPackageDelegate.kt:12:27 Parameter 'reactContext' is never used
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/release/java/expo/modules/devlauncher/DevLauncherPackageDelegate.kt:13:43 Parameter 'context' is never used
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/release/java/expo/modules/devlauncher/DevLauncherPackageDelegate.kt:14:45 Parameter 'activityContext' is never used
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/release/java/expo/modules/devlauncher/DevLauncherPackageDelegate.kt:15:35 Parameter 'activityContext' is never used
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/release/java/expo/modules/devlauncher/DevLauncherPackageDelegate.kt:16:37 Parameter 'context' is never used
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/release/java/expo/modules/devlauncher/launcher/DevLauncherReactHost.kt:8:14 Parameter 'application' is never used
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/release/java/expo/modules/devlauncher/launcher/DevLauncherReactHost.kt:8:40 Parameter 'launcherIp' is never used
+w: file:///D:/document/project/Swell-client/frontend/node_modules/expo-dev-launcher/android/src/release/java/expo/modules/devlauncher/launcher/DevLauncherReactNativeHost.kt:8:60 Parameter 'launcherIp' is never used
+
+> Task :react-native-reanimated:buildCMakeRelWithDebInfo[armeabi-v7a] FAILED
+C/C++: ninja: error: mkdir(src/main/cpp/reanimated/CMakeFiles/reanimated.dir/D_/document/project/Swell-client/frontend/node_modules/react-native-reanimated/Common): No such file or directory
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':react-native-reanimated:buildCMakeRelWithDebInfo[armeabi-v7a]'.
+> com.android.ide.common.process.ProcessException: ninja: Entering directory `D:\document\project\Swell-client\frontend\node_modules\react-native-reanimated\android\.cxx\RelWithDebInfo\ti6u21w6\armeabi-v7a'
+  [0/2] Re-checking globbed directories...
+  [1/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/a4230bbfdeb52fbdb5a551fa53bf3aff/worklets/Tools/ReanimatedJSIUtils.cpp.o
+  [2/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/138e774be4f33dd0320cd5b82bb9e43d/cpp/worklets/Tools/AsyncQueue.cpp.o
+  [3/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/138e774be4f33dd0320cd5b82bb9e43d/cpp/worklets/Tools/JSScheduler.cpp.o
+  [4/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/69ff9fc35b596e52548e7f96a7e288cb/WorkletRuntime/ReanimatedRuntime.cpp.o
+  [5/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/138e774be4f33dd0320cd5b82bb9e43d/cpp/worklets/Tools/UIScheduler.cpp.o
+  [6/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/c01f37f24b10493b4c3af3b067b75ee9/Common/cpp/worklets/Tools/JSLogger.cpp.o
+  [7/37] Building CXX object src/main/cpp/reanimated/CMakeFiles/reanimated.dir/a4230bbfdeb52fbdb5a551fa53bf3aff/reanimated/Fabric/PropsRegistry.cpp.o
+  [8/37] Building CXX object src/main/cpp/reanimated/CMakeFiles/reanimated.dir/9528977f71df075ffcb5b01fd54360cb/Fabric/ReanimatedCommitHook.cpp.o
+  [9/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/d48ce571f53cf121930cdbf926c3f8b0/ReanimatedHermesRuntime.cpp.o
+  [10/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/a4230bbfdeb52fbdb5a551fa53bf3aff/worklets/Tools/ReanimatedVersion.cpp.o
+  [11/37] Building CXX object src/main/cpp/reanimated/CMakeFiles/reanimated.dir/d6c00effee3ec6923e64e558606125cc/LayoutAnimationsProxy.cpp.o
+  [12/37] Building CXX object src/main/cpp/reanimated/CMakeFiles/reanimated.dir/9528977f71df075ffcb5b01fd54360cb/Fabric/ShadowTreeCloner.cpp.o
+  [13/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/a4230bbfdeb52fbdb5a551fa53bf3aff/worklets/Tools/WorkletEventHandler.cpp.o
+  [14/37] Building CXX object src/main/cpp/reanimated/CMakeFiles/reanimated.dir/d6c00effee3ec6923e64e558606125cc/LayoutAnimationsUtils.cpp.o
+  [15/37] Building CXX object src/main/cpp/reanimated/CMakeFiles/reanimated.dir/9528977f71df075ffcb5b01fd54360cb/Fabric/ReanimatedMountHook.cpp.o
+  ninja: build stopped: .
+  
+  C++ build system [build] failed while executing:
+      @echo off
+      "C:\\Users\\exile\\AppData\\Local\\Android\\Sdk\\cmake\\3.22.1\\bin\\ninja.exe" ^
+        -C ^
+        "D:\\document\\project\\Swell-client\\frontend\\node_modules\\react-native-reanimated\\android\\.cxx\\RelWithDebInfo\\ti6u21w6\\armeabi-v7a" ^
+        reanimated ^
+        worklets
+    from D:\document\project\Swell-client\frontend\node_modules\react-native-reanimated\android
+  ninja: error: mkdir(src/main/cpp/reanimated/CMakeFiles/reanimated.dir/D_/document/project/Swell-client/frontend/node_modules/react-native-reanimated/Common): No such file or directory
+
+* Try:
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+* Exception is:
+org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':react-native-reanimated:buildCMakeRelWithDebInfo[armeabi-v7a]'.
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.lambda$executeIfValid$1(ExecuteActionsTaskExecuter.java:130)
+	at org.gradle.internal.Try$Failure.ifSuccessfulOrElse(Try.java:293)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:128)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:116)
+	at org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute(FinalizePropertiesTaskExecuter.java:46)
+	at org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute(ResolveTaskExecutionModeExecuter.java:51)
+	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:57)
+	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:74)
+	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:36)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask(EventFiringTaskExecuter.java:77)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:55)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:52)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:209)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:166)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute(EventFiringTaskExecuter.java:52)
+	at org.gradle.execution.plan.LocalTaskNodeExecutor.execute(LocalTaskNodeExecutor.java:42)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:331)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:318)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.lambda$execute$0(DefaultTaskExecutionGraph.java:314)
+	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:314)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:303)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:459)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:48)
+Caused by: org.gradle.internal.UncheckedException: com.android.ide.common.process.ProcessException: ninja: Entering directory `D:\document\project\Swell-client\frontend\node_modules\react-native-reanimated\android\.cxx\RelWithDebInfo\ti6u21w6\armeabi-v7a'
+[0/2] Re-checking globbed directories...
+[1/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/a4230bbfdeb52fbdb5a551fa53bf3aff/worklets/Tools/ReanimatedJSIUtils.cpp.o
+[2/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/138e774be4f33dd0320cd5b82bb9e43d/cpp/worklets/Tools/AsyncQueue.cpp.o
+[3/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/138e774be4f33dd0320cd5b82bb9e43d/cpp/worklets/Tools/JSScheduler.cpp.o
+[4/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/69ff9fc35b596e52548e7f96a7e288cb/WorkletRuntime/ReanimatedRuntime.cpp.o
+[5/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/138e774be4f33dd0320cd5b82bb9e43d/cpp/worklets/Tools/UIScheduler.cpp.o
+[6/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/c01f37f24b10493b4c3af3b067b75ee9/Common/cpp/worklets/Tools/JSLogger.cpp.o
+[7/37] Building CXX object src/main/cpp/reanimated/CMakeFiles/reanimated.dir/a4230bbfdeb52fbdb5a551fa53bf3aff/reanimated/Fabric/PropsRegistry.cpp.o
+[8/37] Building CXX object src/main/cpp/reanimated/CMakeFiles/reanimated.dir/9528977f71df075ffcb5b01fd54360cb/Fabric/ReanimatedCommitHook.cpp.o
+[9/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/d48ce571f53cf121930cdbf926c3f8b0/ReanimatedHermesRuntime.cpp.o
+[10/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/a4230bbfdeb52fbdb5a551fa53bf3aff/worklets/Tools/ReanimatedVersion.cpp.o
+[11/37] Building CXX object src/main/cpp/reanimated/CMakeFiles/reanimated.dir/d6c00effee3ec6923e64e558606125cc/LayoutAnimationsProxy.cpp.o
+[12/37] Building CXX object src/main/cpp/reanimated/CMakeFiles/reanimated.dir/9528977f71df075ffcb5b01fd54360cb/Fabric/ShadowTreeCloner.cpp.o
+[13/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/a4230bbfdeb52fbdb5a551fa53bf3aff/worklets/Tools/WorkletEventHandler.cpp.o
+[14/37] Building CXX object src/main/cpp/reanimated/CMakeFiles/reanimated.dir/d6c00effee3ec6923e64e558606125cc/LayoutAnimationsUtils.cpp.o
+[15/37] Building CXX object src/main/cpp/reanimated/CMakeFiles/reanimated.dir/9528977f71df075ffcb5b01fd54360cb/Fabric/ReanimatedMountHook.cpp.o
+ninja: build stopped: .
+
+C++ build system [build] failed while executing:
+    @echo off
+    "C:\\Users\\exile\\AppData\\Local\\Android\\Sdk\\cmake\\3.22.1\\bin\\ninja.exe" ^
+      -C ^
+      "D:\\document\\project\\Swell-client\\frontend\\node_modules\\react-native-reanimated\\android\\.cxx\\RelWithDebInfo\\ti6u21w6\\armeabi-v7a" ^
+      reanimated ^
+      worklets
+  from D:\document\project\Swell-client\frontend\node_modules\react-native-reanimated\android
+ninja: error: mkdir(src/main/cpp/reanimated/CMakeFiles/reanimated.dir/D_/document/project/Swell-client/frontend/node_modules/react-native-reanimated/Common): No such file or directory
+
+	at org.gradle.internal.UncheckedException.throwAsUncheckedException(UncheckedException.java:69)
+	at org.gradle.internal.UncheckedException.throwAsUncheckedException(UncheckedException.java:42)
+	at org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:128)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.doExecute(StandardTaskAction.java:58)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:51)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:29)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$3.run(TaskExecution.java:244)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:29)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:26)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:166)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:47)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeAction(TaskExecution.java:229)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeActions(TaskExecution.java:212)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeWithPreviousOutputFiles(TaskExecution.java:195)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.execute(TaskExecution.java:162)
+	at org.gradle.internal.execution.steps.ExecuteStep.executeInternal(ExecuteStep.java:105)
+	at org.gradle.internal.execution.steps.ExecuteStep.access$000(ExecuteStep.java:44)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:59)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:56)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:209)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:166)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
+	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:56)
+	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:44)
+	at org.gradle.internal.execution.steps.CancelExecutionStep.execute(CancelExecutionStep.java:42)
+	at org.gradle.internal.execution.steps.TimeoutStep.executeWithoutTimeout(TimeoutStep.java:75)
+	at org.gradle.internal.execution.steps.TimeoutStep.execute(TimeoutStep.java:55)
+	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:50)
+	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:28)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.execute(RemovePreviousOutputsStep.java:67)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.execute(RemovePreviousOutputsStep.java:37)
+	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:61)
+	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:26)
+	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:69)
+	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:46)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.execute(ResolveInputChangesStep.java:40)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.execute(ResolveInputChangesStep.java:29)
+	at org.gradle.internal.execution.steps.BuildCacheStep.executeWithoutCache(BuildCacheStep.java:189)
+	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$execute$1(BuildCacheStep.java:75)
+	at org.gradle.internal.Either$Right.fold(Either.java:175)
+	at org.gradle.internal.execution.caching.CachingState.fold(CachingState.java:62)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:73)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:48)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.execute(StoreExecutionStateStep.java:46)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.execute(StoreExecutionStateStep.java:35)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.executeBecause(SkipUpToDateStep.java:75)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.lambda$execute$2(SkipUpToDateStep.java:53)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:53)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:35)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:37)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:27)
+	at org.gradle.internal.execution.steps.ResolveIncrementalCachingStateStep.executeDelegate(ResolveIncrementalCachingStateStep.java:49)
+	at org.gradle.internal.execution.steps.ResolveIncrementalCachingStateStep.executeDelegate(ResolveIncrementalCachingStateStep.java:27)
+	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:71)
+	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:39)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.execute(ResolveChangesStep.java:65)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.execute(ResolveChangesStep.java:36)
+	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:107)
+	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:56)
+	at org.gradle.internal.execution.steps.AbstractCaptureStateBeforeExecutionStep.execute(AbstractCaptureStateBeforeExecutionStep.java:64)
+	at org.gradle.internal.execution.steps.AbstractCaptureStateBeforeExecutionStep.execute(AbstractCaptureStateBeforeExecutionStep.java:43)
+	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.executeWithNonEmptySources(AbstractSkipEmptyWorkStep.java:125)
+	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.execute(AbstractSkipEmptyWorkStep.java:56)
+	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.execute(AbstractSkipEmptyWorkStep.java:36)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsStartedStep.execute(MarkSnapshottingInputsStartedStep.java:38)
+	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.execute(LoadPreviousExecutionStateStep.java:36)
+	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.execute(LoadPreviousExecutionStateStep.java:23)
+	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.execute(HandleStaleOutputsStep.java:75)
+	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.execute(HandleStaleOutputsStep.java:41)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.lambda$execute$0(AssignMutableWorkspaceStep.java:35)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$4.withWorkspace(TaskExecution.java:289)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.execute(AssignMutableWorkspaceStep.java:31)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.execute(AssignMutableWorkspaceStep.java:22)
+	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:40)
+	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:23)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.lambda$execute$2(ExecuteWorkBuildOperationFiringStep.java:67)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:67)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:39)
+	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:46)
+	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:34)
+	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:48)
+	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:35)
+	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:61)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:127)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:116)
+	at org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute(FinalizePropertiesTaskExecuter.java:46)
+	at org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute(ResolveTaskExecutionModeExecuter.java:51)
+	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:57)
+	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:74)
+	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:36)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask(EventFiringTaskExecuter.java:77)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:55)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:52)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:209)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:166)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute(EventFiringTaskExecuter.java:52)
+	at org.gradle.execution.plan.LocalTaskNodeExecutor.execute(LocalTaskNodeExecutor.java:42)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:331)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:318)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.lambda$execute$0(DefaultTaskExecutionGraph.java:314)
+	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:314)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:303)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:459)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:48)
+Caused by: com.android.ide.common.process.ProcessException: ninja: Entering directory `D:\document\project\Swell-client\frontend\node_modules\react-native-reanimated\android\.cxx\RelWithDebInfo\ti6u21w6\armeabi-v7a'
+[0/2] Re-checking globbed directories...
+[1/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/a4230bbfdeb52fbdb5a551fa53bf3aff/worklets/Tools/ReanimatedJSIUtils.cpp.o
+[2/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/138e774be4f33dd0320cd5b82bb9e43d/cpp/worklets/Tools/AsyncQueue.cpp.o
+[3/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/138e774be4f33dd0320cd5b82bb9e43d/cpp/worklets/Tools/JSScheduler.cpp.o
+[4/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/69ff9fc35b596e52548e7f96a7e288cb/WorkletRuntime/ReanimatedRuntime.cpp.o
+[5/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/138e774be4f33dd0320cd5b82bb9e43d/cpp/worklets/Tools/UIScheduler.cpp.o
+[6/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/c01f37f24b10493b4c3af3b067b75ee9/Common/cpp/worklets/Tools/JSLogger.cpp.o
+[7/37] Building CXX object src/main/cpp/reanimated/CMakeFiles/reanimated.dir/a4230bbfdeb52fbdb5a551fa53bf3aff/reanimated/Fabric/PropsRegistry.cpp.o
+[8/37] Building CXX object src/main/cpp/reanimated/CMakeFiles/reanimated.dir/9528977f71df075ffcb5b01fd54360cb/Fabric/ReanimatedCommitHook.cpp.o
+[9/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/d48ce571f53cf121930cdbf926c3f8b0/ReanimatedHermesRuntime.cpp.o
+[10/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/a4230bbfdeb52fbdb5a551fa53bf3aff/worklets/Tools/ReanimatedVersion.cpp.o
+[11/37] Building CXX object src/main/cpp/reanimated/CMakeFiles/reanimated.dir/d6c00effee3ec6923e64e558606125cc/LayoutAnimationsProxy.cpp.o
+[12/37] Building CXX object src/main/cpp/reanimated/CMakeFiles/reanimated.dir/9528977f71df075ffcb5b01fd54360cb/Fabric/ShadowTreeCloner.cpp.o
+[13/37] Building CXX object src/main/cpp/worklets/CMakeFiles/worklets.dir/a4230bbfdeb52fbdb5a551fa53bf3aff/worklets/Tools/WorkletEventHandler.cpp.o
+[14/37] Building CXX object src/main/cpp/reanimated/CMakeFiles/reanimated.dir/d6c00effee3ec6923e64e558606125cc/LayoutAnimationsUtils.cpp.o
+[15/37] Building CXX object src/main/cpp/reanimated/CMakeFiles/reanimated.dir/9528977f71df075ffcb5b01fd54360cb/Fabric/ReanimatedMountHook.cpp.o
+ninja: build stopped: .
+C++ build system [build] failed while executing:
+    @echo off
+    "C:\\Users\\exile\\AppData\\Local\\Android\\Sdk\\cmake\\3.22.1\\bin\\ninja.exe" ^
+      -C ^
+      "D:\\document\\project\\Swell-client\\frontend\\node_modules\\react-native-reanimated\\android\\.cxx\\RelWithDebInfo\\ti6u21w6\\armeabi-v7a" ^
+      reanimated ^
+      worklets
+  from D:\document\project\Swell-client\frontend\node_modules\react-native-reanimated\android
+ninja: error: mkdir(src/main/cpp/reanimated/CMakeFiles/reanimated.dir/D_/document/project/Swell-client/frontend/node_modules/react-native-reanimated/Common): No such file or directory
+
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.execute(ExecuteProcess.kt:288)
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt$executeProcess$1.invoke(ExecuteProcess.kt:108)
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt$executeProcess$1.invoke(ExecuteProcess.kt:106)
+	at com.android.build.gradle.internal.cxx.timing.TimingEnvironmentKt.time(TimingEnvironment.kt:32)
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.executeProcess(ExecuteProcess.kt:106)
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.executeProcess$default(ExecuteProcess.kt:85)
+	at com.android.build.gradle.internal.cxx.build.CxxRegularBuilder.executeProcessBatch(CxxRegularBuilder.kt:332)
+	at com.android.build.gradle.internal.cxx.build.CxxRegularBuilder.build(CxxRegularBuilder.kt:129)
+	at com.android.build.gradle.tasks.ExternalNativeBuildTask$doTaskAction$$inlined$recordTaskAction$1.invoke(BaseTask.kt:71)
+	at com.android.build.gradle.internal.tasks.Blocks.recordSpan(Blocks.java:51)
+	at com.android.build.gradle.tasks.ExternalNativeBuildTask.doTaskAction(ExternalNativeBuildTask.kt:144)
+	at com.android.build.gradle.internal.tasks.UnsafeOutputsTask$taskAction$$inlined$recordTaskAction$1.invoke(BaseTask.kt:66)
+	at com.android.build.gradle.internal.tasks.Blocks.recordSpan(Blocks.java:51)
+	at com.android.build.gradle.internal.tasks.UnsafeOutputsTask.taskAction(UnsafeOutputsTask.kt:81)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(Unknown Source)
+	at org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:125)
+	... 116 more
+Caused by: com.android.ide.common.process.ProcessException: Error while executing process C:\Users\exile\AppData\Local\Android\Sdk\cmake\3.22.1\bin\ninja.exe with arguments {-C D:\document\project\Swell-client\frontend\node_modules\react-native-reanimated\android\.cxx\RelWithDebInfo\ti6u21w6\armeabi-v7a reanimated worklets}
+	at com.android.build.gradle.internal.process.GradleProcessResult.buildProcessException(GradleProcessResult.java:73)
+	at com.android.build.gradle.internal.process.GradleProcessResult.assertNormalExitValue(GradleProcessResult.java:48)
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.execute(ExecuteProcess.kt:277)
+	... 131 more
+Caused by: org.gradle.process.internal.ExecException: Process 'command 'C:\Users\exile\AppData\Local\Android\Sdk\cmake\3.22.1\bin\ninja.exe'' finished with non-zero exit value 1
+
+	at org.gradle.process.internal.DefaultExecHandle$ExecResultImpl.assertNormalExitValue(DefaultExecHandle.java:442)
+	at com.android.build.gradle.internal.process.GradleProcessResult.assertNormalExitValue(GradleProcessResult.java:46)
+	... 132 more
+
+
+BUILD FAILED in 6m 1s
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.10.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+582 actionable tasks: 530 executed, 52 up-to-date

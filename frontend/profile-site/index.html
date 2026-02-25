@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>푸른파도 | 너울 프로필</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Outfit:wght@300;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --color-bg: #001220;
+        --color-card: #002845;
+        --color-primary: #00e0d0;
+        --color-text: #e0e0e0;
+      }
+      body {
+        background-color: var(--color-bg);
+        color: var(--color-text);
+        font-family: "Outfit", sans-serif;
+        overflow-x: hidden;
+      }
+      .glass {
+        background: rgba(0, 40, 69, 0.4);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .gradient-text {
+        background: linear-gradient(135deg, #00e0d0 0%, #00b4d8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .wave-animation {
+        mask-image: linear-gradient(to bottom, transparent, black);
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+      .float-anim {
+        animation: float 4s ease-in-out infinite;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col items-center py-12 px-6">
+    <!-- Background Decor -->
+    <div
+      class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#00E0D0]/5 rounded-full blur-[120px] pointer-events-none"
+    ></div>
+    <div
+      class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#00E0D0]/5 rounded-full blur-[120px] pointer-events-none"
+    ></div>
+
+    <!-- Profile Card -->
+    <main class="w-full max-w-md space-y-8 relative z-10">
+      <!-- Identity Section -->
+      <section class="glass rounded-[50px] p-10 flex flex-col items-center shadow-2xl">
+        <div class="relative mb-8 float-anim">
+          <div
+            class="w-32 h-32 rounded-[45px] bg-[#002845] border-2 border-[#00E0D0]/30 flex items-center justify-center p-2"
+          >
+            <div class="w-full h-full rounded-[38px] overflow-hidden bg-[#001220] flex items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="60"
+                height="60"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#00E0D0"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="opacity-50"
+              >
+                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+          </div>
+          <div class="absolute bottom-0 right-[-8px] bg-[#00E0D0] p-2 rounded-2xl border-4 border-[#001220]">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#001220"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"
+              ></path>
+              <circle cx="12" cy="13" r="3"></circle>
+            </svg>
+          </div>
+        </div>
+
+        <h1 class="text-4xl font-extrabold tracking-tight mb-2">푸른파도</h1>
+        <div class="flex items-center space-x-2 bg-[#00E0D0]/10 px-3 py-1 rounded-full mb-8">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#00E0D0"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          <span class="text-[#00E0D0] text-[10px] font-bold tracking-tighter">본인인증 완료</span>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 w-full">
+          <div class="flex flex-col items-center">
+            <span class="text-xl font-bold">12</span>
+            <span class="text-[10px] text-[#E0E0E0]/30 font-bold uppercase tracking-widest">담은 파도</span>
+          </div>
+          <div class="flex flex-col items-center border-x border-white/5">
+            <span class="text-xl font-bold">128</span>
+            <span class="text-[10px] text-[#E0E0E0]/30 font-bold uppercase tracking-widest">받은 공감</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <span class="text-xl font-bold">45</span>
+            <span class="text-[10px] text-[#E0E0E0]/30 font-bold uppercase tracking-widest">나눈 대화</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Badges -->
+      <section class="space-y-6">
+        <div class="flex justify-between items-center px-4">
+          <h2 class="text-xs font-bold text-[#E0E0E0]/30 tracking-[4px] uppercase">Badges</h2>
+          <button class="text-[#00E0D0] text-xs font-bold">전체보기</button>
+        </div>
+        <div class="flex space-x-4 overflow-x-auto pb-4 no-scrollbar">
+          <div class="glass flex-shrink-0 w-28 p-5 rounded-[35px] flex flex-col items-center border border-white/5">
+            <span class="text-3xl mb-3">🌊</span>
+            <span class="text-[11px] font-bold">첫 물결</span>
+          </div>
+          <div class="glass flex-shrink-0 w-28 p-5 rounded-[35px] flex flex-col items-center border border-white/5">
+            <span class="text-3xl mb-3">💎</span>
+            <span class="text-[11px] font-bold">깊은 경청</span>
+          </div>
+          <div class="glass flex-shrink-0 w-28 p-5 rounded-[35px] flex flex-col items-center border border-white/5">
+            <span class="text-3xl mb-3">🌞</span>
+            <span class="text-[11px] font-bold">따뜻한 햇살</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="pt-8 text-center">
+        <p class="text-[10px] text-[#E0E0E0]/20 tracking-[4px]">S WELL IDENTITY 2026</p>
+      </footer>
+    </main>
+  </body>
+</html>

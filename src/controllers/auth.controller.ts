@@ -12,8 +12,8 @@ const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
  */
 export const socialLogin = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { provider, accessToken } = req.body;
-    console.log(`[Auth] socialLogin started for provider: ${provider}`);
+    const { provider, accessToken, codeVerifier } = req.body;
+    console.log(`[Auth] socialLogin started for provider: ${provider}, PKCE: ${!!codeVerifier}`);
     let { socialId, nickname, birthDate } = req.body;
 
     if (!provider) {
@@ -33,30 +33,48 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
         const apiKey = process.env.KAKAO_REST_API_KEY?.trim();
         const clientSecret = process.env.KAKAO_CLIENT_SECRET?.trim();
 
-        if (!apiKey || !clientSecret) {
-          console.error('[Auth] Kakao API Key or Client Secret is missing in Environment Variables');
+        if (!apiKey) {
+          console.error('[Auth] Kakao API Key is missing');
           return res.status(500).json({
             success: false,
-            message: '서버 환경 설정(Kakao API Key/Secret)이 누락되었습니다.',
-            details: { apiKey: !!apiKey, clientSecret: !!clientSecret }
+            message: '서버 환경 설정(Kakao API Key)이 누락되었습니다.',
           });
         }
 
         const targetRedirectUri = req.body.redirectUri || 'https://swell-backend.onrender.com/api/auth/callback';
-        console.log(`[Auth] Exchanging Kakao Code for Token. Code: ${accessToken.substring(0, 10)}..., RedirectURI: ${targetRedirectUri}`);
-        const tokenResponse = await axios.post('https://kauth.kakao.com/oauth/token', null, {
-          params: {
+        console.log(`[Auth] Exchanging Kakao Code for Token. PKCE: ${!!codeVerifier}`);
+
+        const exchangeToken = async (useSecret: boolean) => {
+          const payload: any = new URLSearchParams({
             grant_type: 'authorization_code',
             client_id: apiKey,
-            client_secret: clientSecret,
             redirect_uri: targetRedirectUri,
             code: accessToken,
-          },
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
-          },
-        });
-        realToken = tokenResponse.data.access_token;
+          });
+          if (useSecret && clientSecret) payload.append('client_secret', clientSecret);
+          if (codeVerifier) payload.append('code_verifier', codeVerifier);
+
+          return axios.post('https://kauth.kakao.com/oauth/token', payload.toString(), {
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' },
+          });
+        };
+
+        try {
+          // 1차 시도: Secret 포함 (있다면)
+          const tokenResponse = await exchangeToken(true);
+          realToken = tokenResponse.data.access_token;
+        } catch (firstError: any) {
+          const firstErrData = firstError.response?.data;
+          // KOE010 (Bad client credentials) 발생 시 Secret 없이 재시도
+          if (firstErrData?.error_code === 'KOE010') {
+            console.log('[Auth] Kakao KOE010 detected. Retrying without client_secret...');
+            const tokenResponse = await exchangeToken(false);
+            realToken = tokenResponse.data.access_token;
+          } else {
+            throw firstError;
+          }
+        }
+
         console.log('[Auth] Kakao Token Exchange Success');
       } catch (error: any) {
         const errorDetail = error.response?.data || error.message;
@@ -113,13 +131,14 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
           });
         }
 
-        console.log('[Auth] Exchanging Google Code for Token...');
+        console.log(`[Auth] Exchanging Google Code for Token. PKCE: ${!!codeVerifier}`);
         const tokenResponse = await axios.post('https://oauth2.googleapis.com/token', {
           code: accessToken,
           client_id: clientId,
           client_secret: clientSecret,
           redirect_uri: req.body.redirectUri || 'https://swell-backend.onrender.com/api/auth/callback',
           grant_type: 'authorization_code',
+          code_verifier: codeVerifier,
         });
         idToken = tokenResponse.data.id_token;
         console.log('[Auth] Google Token Exchange Success');
