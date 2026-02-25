@@ -19,16 +19,39 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
       return res.status(400).json({ message: 'provider는 필수입니다.' });
     }
 
-    // 1. 카카오인 경우 실시간 토큰 검증
+    // 1. 카카오인 경우
     if (provider === 'kakao') {
       if (!accessToken) {
-        return res.status(400).json({ message: '카카오 로그인에는 accessToken이 필수입니다.' });
+        return res.status(400).json({ message: '카카오 로그인에는 인가 코드(또는 토큰)가 필수입니다.' });
+      }
+
+      let realToken = accessToken;
+
+      // 만약 넘어온 값이 '인가 코드'라면 (길이가 짧거나 특정 패턴일 경우 교환 시도)
+      // 현재 프론트엔드에서 responseType: 'code'로 보내기로 했으므로 무조건 교환 시도
+      try {
+        const tokenResponse = await axios.post('https://kauth.kakao.com/oauth/token', null, {
+          params: {
+            grant_type: 'authorization_code',
+            client_id: process.env.KAKAO_REST_API_KEY,
+            client_secret: process.env.KAKAO_CLIENT_SECRET,
+            redirect_uri: req.body.redirectUri || 'https://swell-backend.onrender.com/api/auth/callback',
+            code: accessToken,
+          },
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+          },
+        });
+        realToken = tokenResponse.data.access_token;
+      } catch (error: any) {
+        console.error('[Kakao Token Exchange Error]', error.response?.data || error.message);
+        // 이미 토큰일 수도 있으므로 실패해도 계속 진행해봄 (또는 명확히 에러 처리)
       }
 
       try {
         const kakaoResponse = await axios.get('https://kapi.kakao.com/v2/user/me', {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${realToken}`,
             'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
           },
         });
@@ -37,7 +60,6 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
         socialId = kakaoData.id.toString();
         nickname = kakaoData.properties?.nickname || nickname;
 
-        // 카카오 계정 설정에 따라 생일 정보가 있을 수 있음 (optional)
         if (kakaoData.kakao_account?.birthyear && kakaoData.kakao_account?.birthday) {
           birthDate = `${kakaoData.kakao_account.birthyear}-${kakaoData.kakao_account.birthday.slice(0, 2)}-${kakaoData.kakao_account.birthday.slice(2)}`;
         }
@@ -46,15 +68,32 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
       }
     }
 
-    // 2. 구글인 경우 실시간 토큰 검증
+    // 2. 구글인 경우
     if (provider === 'google') {
       if (!accessToken) {
-        return res.status(400).json({ message: '구글 로그인에는 ID 토큰(accessToken)이 필수입니다.' });
+        return res.status(400).json({ message: '구글 로그인에는 인가 코드가 필수입니다.' });
+      }
+
+      let idToken = accessToken;
+
+      // 구글 인가 코드를 ID 토큰으로 교환
+      try {
+        const tokenResponse = await axios.post('https://oauth2.googleapis.com/token', {
+          code: accessToken,
+          client_id: process.env.GOOGLE_CLIENT_ID,
+          client_secret: process.env.GOOGLE_CLIENT_SECRET,
+          redirect_uri: req.body.redirectUri || 'https://swell-backend.onrender.com/api/auth/callback',
+          grant_type: 'authorization_code',
+        });
+        idToken = tokenResponse.data.id_token;
+      } catch (error: any) {
+        console.error('[Google Token Exchange Error]', error.response?.data || error.message);
+        // 이미 id_token일 가능성도 있으므로 유지
       }
 
       try {
         const ticket = await googleClient.verifyIdToken({
-          idToken: accessToken,
+          idToken: idToken,
           audience: process.env.GOOGLE_CLIENT_ID,
         });
 
