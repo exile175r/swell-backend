@@ -30,13 +30,25 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
       let realToken = accessToken;
 
       try {
+        const apiKey = process.env.KAKAO_REST_API_KEY;
+        const clientSecret = process.env.KAKAO_CLIENT_SECRET;
+
+        if (!apiKey || !clientSecret) {
+          console.error('[Auth] Kakao API Key or Client Secret is missing in Environment Variables');
+          return res.status(500).json({
+            success: false,
+            message: '서버 환경 설정(Kakao API Key/Secret)이 누락되었습니다. 관리자에게 문의하세요.',
+            details: { apiKey: !!apiKey, clientSecret: !!clientSecret }
+          });
+        }
+
         const targetRedirectUri = req.body.redirectUri || 'https://swell-backend.onrender.com/api/auth/callback';
         console.log(`[Auth] Exchanging Kakao Code for Token. Code: ${accessToken.substring(0, 10)}..., RedirectURI: ${targetRedirectUri}`);
         const tokenResponse = await axios.post('https://kauth.kakao.com/oauth/token', null, {
           params: {
             grant_type: 'authorization_code',
-            client_id: process.env.KAKAO_REST_API_KEY,
-            client_secret: process.env.KAKAO_CLIENT_SECRET,
+            client_id: apiKey,
+            client_secret: clientSecret,
             redirect_uri: targetRedirectUri,
             code: accessToken,
           },
@@ -89,11 +101,23 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
       let idToken = accessToken;
 
       try {
+        const clientId = process.env.GOOGLE_CLIENT_ID;
+        const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+
+        if (!clientId || !clientSecret) {
+          console.error('[Auth] Google Client ID or Secret is missing in Environment Variables');
+          return res.status(500).json({
+            success: false,
+            message: '서버 환경 설정(Google Client ID/Secret)이 누락되었습니다.',
+            details: { clientId: !!clientId, clientSecret: !!clientSecret }
+          });
+        }
+
         console.log('[Auth] Exchanging Google Code for Token...');
         const tokenResponse = await axios.post('https://oauth2.googleapis.com/token', {
           code: accessToken,
-          client_id: process.env.GOOGLE_CLIENT_ID,
-          client_secret: process.env.GOOGLE_CLIENT_SECRET,
+          client_id: clientId,
+          client_secret: clientSecret,
           redirect_uri: req.body.redirectUri || 'https://swell-backend.onrender.com/api/auth/callback',
           grant_type: 'authorization_code',
         });
