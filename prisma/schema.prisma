@@ -15,6 +15,9 @@ model User {
   provider  String?  // google | kakao
   ageVerified Boolean @default(false)
   birthDate  String?  // YYYY-MM-DD
+  membership String   @default("NORMAL") // NORMAL | VIP
+  tokens     Int      @default(10)
+  lastTokenResetDate DateTime @default(now())
   createdAt DateTime @default(now())
   posts     Post[]
   comments  Comment[]
@@ -31,6 +34,8 @@ model Post {
   userId    String
   user      User     @relation(fields: [userId], references: [id])
   content   String   @db.Text
+  isPremium Boolean  @default(false)
+  summary   String?  @db.Text
   hasVote   Boolean  @default(false)
   createdAt DateTime @default(now())
   comments  Comment[]
@@ -107,4 +112,22 @@ model Notification {
   message   String
   isRead    Boolean  @default(false)
   createdAt DateTime @default(now())
+}
+
+model PostViewLog {
+  id        Int      @id @default(autoincrement())
+  postId    Int?
+  userId    String?
+  ip        String?
+  viewedAt  DateTime @default(now())
+}
+
+model LlmUsageLog {
+  id               Int      @id @default(autoincrement())
+  model            String
+  promptTokens     Int
+  completionTokens Int
+  totalTokens      Int
+  cost             Float
+  createdAt        DateTime @default(now())
 }

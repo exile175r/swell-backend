@@ -55,4 +55,25 @@ router.post('/social', authController.socialLogin);
  */
 router.post('/verify-adult', authenticate, authController.verifyAdultFree);
 
+/**
+ * @swagger
+ * /api/auth/callback:
+ *   get:
+ *     summary: 소셜 로그인 콜백 브릿지 (앱 딥링크 리다이렉트)
+ *     tags: [Auth]
+ *     parameters:
+ *       - in: query
+ *         name: any
+ *         schema:
+ *           type: string
+ *     responses:
+ *       302:
+ *         description: 앱 딥링크로 리다이렉트
+ */
+router.get('/callback', (req, res) => {
+  const queryParams = new URLSearchParams(req.query as any).toString();
+  const deepLink = `swell://oauth?${queryParams}`;
+  res.redirect(deepLink);
+});
+
 export default router;
