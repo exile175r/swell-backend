@@ -13,6 +13,7 @@ const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 export const socialLogin = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { provider, accessToken } = req.body;
+    console.log(`[Auth] socialLogin started for provider: ${provider}`);
     let { socialId, nickname, birthDate } = req.body;
 
     if (!provider) {
@@ -21,15 +22,15 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
 
     // 1. 카카오인 경우
     if (provider === 'kakao') {
+      console.log('[Auth] Processing Kakao Login...');
       if (!accessToken) {
-        return res.status(400).json({ message: '카카오 로그인에는 인가 코드(또는 토큰)가 필수입니다.' });
+        return res.status(400).json({ message: '카카오 로그인에는 인가 코드가 필수입니다.' });
       }
 
       let realToken = accessToken;
 
-      // 만약 넘어온 값이 '인가 코드'라면 (길이가 짧거나 특정 패턴일 경우 교환 시도)
-      // 현재 프론트엔드에서 responseType: 'code'로 보내기로 했으므로 무조건 교환 시도
       try {
+        console.log('[Auth] Exchanging Kakao Code for Token...');
         const tokenResponse = await axios.post('https://kauth.kakao.com/oauth/token', null, {
           params: {
             grant_type: 'authorization_code',
@@ -43,12 +44,19 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
           },
         });
         realToken = tokenResponse.data.access_token;
+        console.log('[Auth] Kakao Token Exchange Success');
       } catch (error: any) {
-        console.error('[Kakao Token Exchange Error]', error.response?.data || error.message);
-        // 이미 토큰일 수도 있으므로 실패해도 계속 진행해봄 (또는 명확히 에러 처리)
+        const errorDetail = error.response?.data || error.message;
+        console.error('[Kakao Token Exchange Error]', errorDetail);
+        return res.status(401).json({
+          success: false,
+          message: '카카오 토큰 교환에 실패했습니다.',
+          error: errorDetail
+        });
       }
 
       try {
+        console.log('[Auth] Fetching Kakao User Info...');
         const kakaoResponse = await axios.get('https://kapi.kakao.com/v2/user/me', {
           headers: {
             Authorization: `Bearer ${realToken}`,
@@ -59,25 +67,28 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
         const kakaoData = kakaoResponse.data;
         socialId = kakaoData.id.toString();
         nickname = kakaoData.properties?.nickname || nickname;
+        console.log(`[Auth] Kakao User Info Fetched: ${socialId}`);
 
         if (kakaoData.kakao_account?.birthyear && kakaoData.kakao_account?.birthday) {
           birthDate = `${kakaoData.kakao_account.birthyear}-${kakaoData.kakao_account.birthday.slice(0, 2)}-${kakaoData.kakao_account.birthday.slice(2)}`;
         }
       } catch (error) {
+        console.error('[Kakao User Me Error]', (error as any).message);
         return res.status(401).json({ message: '유효하지 않은 카카오 토큰입니다.', error: (error as any).message });
       }
     }
 
     // 2. 구글인 경우
     if (provider === 'google') {
+      console.log('[Auth] Processing Google Login...');
       if (!accessToken) {
         return res.status(400).json({ message: '구글 로그인에는 인가 코드가 필수입니다.' });
       }
 
       let idToken = accessToken;
 
-      // 구글 인가 코드를 ID 토큰으로 교환
       try {
+        console.log('[Auth] Exchanging Google Code for Token...');
         const tokenResponse = await axios.post('https://oauth2.googleapis.com/token', {
           code: accessToken,
           client_id: process.env.GOOGLE_CLIENT_ID,
@@ -86,12 +97,19 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
           grant_type: 'authorization_code',
         });
         idToken = tokenResponse.data.id_token;
+        console.log('[Auth] Google Token Exchange Success');
       } catch (error: any) {
-        console.error('[Google Token Exchange Error]', error.response?.data || error.message);
-        // 이미 id_token일 가능성도 있으므로 유지
+        const errorDetail = error.response?.data || error.message;
+        console.error('[Google Token Exchange Error]', errorDetail);
+        return res.status(401).json({
+          success: false,
+          message: '구글 토큰 교환에 실패했습니다.',
+          error: errorDetail
+        });
       }
 
       try {
+        console.log('[Auth] Verifying Google ID Token...');
         const ticket = await googleClient.verifyIdToken({
           idToken: idToken,
           audience: process.env.GOOGLE_CLIENT_ID,
@@ -111,27 +129,39 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
     }
 
     if (!socialId) {
+      console.error('[Auth] socialId is missing after all checks');
       return res.status(400).json({ message: 'socialId를 확인할 수 없습니다.' });
     }
 
     // 2. 기존 사용자 조회 또는 생성 (Upsert)
+    console.log(`[Auth] Searching for user in DB with socialId: ${socialId}`);
     let user = await prisma.user.findUnique({
       where: { socialId }
     });
 
     if (!user) {
-      user = await prisma.user.create({
-        data: {
-          socialId,
-          provider,
-          nickname: nickname || `User_${Math.floor(Math.random() * 10000)}`,
-          birthDate: birthDate || null,
-          ageVerified: false
-        }
-      });
+      console.log(`[Auth] User not found, creating new user for ${provider}...`);
+      try {
+        user = await prisma.user.create({
+          data: {
+            socialId,
+            provider,
+            nickname: nickname || `User_${Math.floor(Math.random() * 10000)}`,
+            birthDate: birthDate || null,
+            ageVerified: false
+          }
+        });
+        console.log(`[Auth] New user created: ${user.id}`);
+      } catch (dbError: any) {
+        console.error('[Auth] Database Create Error:', dbError.message);
+        throw dbError;
+      }
+    } else {
+      console.log(`[Auth] Existing user found: ${user.id}`);
     }
 
     // 2. JWT 토큰 발행
+    console.log('[Auth] Generating JWT Token...');
     const token = generateToken({
       userId: user.id,
       ageVerified: user.ageVerified
