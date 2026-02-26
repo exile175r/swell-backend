@@ -4,3 +4,5 @@ dist
 /generated/prisma
 @문서
 prototype
+frontend/
+update_swagger.ps1
