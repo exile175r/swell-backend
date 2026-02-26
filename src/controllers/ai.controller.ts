@@ -8,7 +8,7 @@ import path from 'path';
 export const transcribeAudio = async (req: Request, res: Response, next: NextFunction) => {
   try {
     // 실제 운영 환경에서는 multer 등을 사용하여 업로드된 파일을 처리합니다.
-    const audioFile = req.file;
+    const audioFile = (req as any).file;
 
     console.log("Audio transcription request received for API...");
 
