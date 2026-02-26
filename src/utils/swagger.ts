@@ -35,7 +35,7 @@ const options: swaggerJSDoc.Options = {
       },
     ],
   },
-  apis: ['./src/routes/*.ts', './src/controllers/*.ts'], // 라우트와 컨트롤러에서 문서를 추출합니다.
+  apis: ['./src/routes/*.ts', './src/controllers/*.ts', './dist/routes/*.js', './dist/controllers/*.js'], // TS와 빌드된 JS 모두에서 문서를 추출합니다.
 };
 
 const swaggerSpec = swaggerJSDoc(options);

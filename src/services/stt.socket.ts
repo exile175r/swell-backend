@@ -9,61 +9,90 @@ export const setupSTTSocket = (io: Server) => {
     console.log('🔌 STT Client connected:', socket.id);
 
     let pythonProcess: ChildProcessWithoutNullStreams | null = null;
-    let tempFilePath: string | null = null;
+    const tempFiles: string[] = [];
 
-    // 1. 스트리밍 시작
+    // 1. STT 세션 시작 (Python 프로세스 미리 실행)
     socket.on('start-stt', () => {
-      console.log('🎤 STT Session started');
+      console.log('🎤 STT Session started:', socket.id);
 
-      // Python 프로세스 실행
+      if (pythonProcess) {
+        pythonProcess.kill();
+      }
+
       const scriptPath = path.resolve('src/services/stt_stream.py');
-      pythonProcess = spawn('python', [scriptPath]);
+      // Python 실행 시 버퍼링 없이 즉시 출력하도록 -u 옵션 사용 권장
+      pythonProcess = spawn('python', ['-u', scriptPath]);
 
       pythonProcess.stdout.on('data', (data) => {
         const text = data.toString().trim();
         if (text) {
+          console.log(`[STT Result ${socket.id}]:`, text);
           socket.emit('stt-result', { text });
         }
       });
 
       pythonProcess.stderr.on('data', (data) => {
-        console.error('🐍 Python Error:', data.toString());
+        const errorMsg = data.toString();
+        if (errorMsg.includes('ERROR')) {
+          console.error('🐍 Python STT Error:', errorMsg);
+        } else {
+          console.log('🐍 Python STT Debug:', errorMsg.trim());
+        }
+      });
+
+      pythonProcess.on('close', (code) => {
+        console.log(`🐍 Python STT process closed with code ${code}`);
       });
     });
 
-    // 2. 오디오 데이터(청크) 수신
+    // 2. 오디오 데이터(청크) 수신 및 처리
     socket.on('audio-chunk', (chunk: Buffer) => {
-      if (!pythonProcess) return;
+      if (!pythonProcess || !pythonProcess.stdin.writable) {
+        console.warn('⚠️ Python process not ready for chunks');
+        return;
+      }
 
-      // 간단한 구현을 위해: 청크를 임시 파일에 쓰고 Python에 경로 전달
-      // 실제 고성능 스트리밍은 stdin에 직접 raw audio를 스트리밍해야 함
-      // 여기서는 빠른 피드백을 위해 0.5~1초 단위의 임시 파일 기반 처리
       try {
+        // 임시 파일 생성 (실제 운영 시에는 메모리 기반 처리가 좋으나, Whisper 특성상 파일 경로 전달이 안정적)
         const filename = `stt_${socket.id}_${Date.now()}.webm`;
-        tempFilePath = path.join(os.tmpdir(), filename);
+        const tempFilePath = path.join(os.tmpdir(), filename);
+
         fs.writeFileSync(tempFilePath, chunk);
+        tempFiles.push(tempFilePath);
 
         // Python 프로세스에 파일 경로 전달
         pythonProcess.stdin.write(tempFilePath + '\n');
       } catch (err) {
-        console.error('❌ Chunk process error:', err);
+        console.error('❌ Chunk processing error:', err);
       }
     });
 
-    // 3. 스트리밍 종료
-    socket.on('stop-stt', () => {
-      console.log('🛑 STT Session stopped');
+    // 3. 스트리밍 종료 및 자원 정리
+    const cleanup = () => {
+      console.log('🛑 STT Session cleanup:', socket.id);
       if (pythonProcess) {
         pythonProcess.stdin.end();
         pythonProcess.kill();
         pythonProcess = null;
       }
-      // 임시 파일 정리 등 (실제 운영시 필요)
-    });
 
+      // 임시 파일 정리
+      while (tempFiles.length > 0) {
+        const file = tempFiles.pop();
+        if (file && fs.existsSync(file)) {
+          try {
+            fs.unlinkSync(file);
+          } catch (e) {
+            console.error('❌ Failed to delete temp file:', file, e);
+          }
+        }
+      }
+    };
+
+    socket.on('stop-stt', cleanup);
     socket.on('disconnect', () => {
-      if (pythonProcess) pythonProcess.kill();
-      console.log('🔌 STT Client disconnected');
+      cleanup();
+      console.log('🔌 STT Client disconnected:', socket.id);
     });
   });
 };

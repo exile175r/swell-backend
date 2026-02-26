@@ -33,13 +33,13 @@ window.onload = function() {
     "paths": {
       "/api/stt": {
         "post": {
-          "summary": "?뚯꽦?몄떇(STT) ?뚯뒪?몄슜 Mock API",
+          "summary": "?ㅼ떆媛?STT ?붿쭊 ?곕룞 ?뚯꽦 蹂??(REST API)",
           "tags": [
             "AI"
           ],
           "responses": {
             "200": {
-              "description": "蹂?섎맂 ?띿뒪??諛섑솚 ?깃났"
+              "description": "STT ?붿쭊 以鍮?諛?蹂???꾨줈?몄뒪 ?쒖옉"
             }
           }
         }
