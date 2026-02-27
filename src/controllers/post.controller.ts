@@ -37,16 +37,37 @@ export const getPosts = async (req: Request, res: Response, next: NextFunction) 
     // Current User ID from JWT
     const currentUserId = req.user?.userId;
 
-    let where: any = {};
+    // 1. 차단 유저 필터링 (내가 차단했거나 나를 차단한 유저 제외)
+    let blockedIds: string[] = [];
+    if (currentUserId) {
+      const blocks = await prisma.block.findMany({
+        where: {
+          OR: [
+            { blockerId: currentUserId },
+            { blockedId: currentUserId }
+          ]
+        },
+        select: { blockerId: true, blockedId: true },
+      });
+      blockedIds = blocks.map((b: any) => b.blockerId === currentUserId ? b.blockedId : b.blockerId);
+    }
 
-    // 1. 팔로잉 필터 처리
-    if (filter === 'following') {
+    let where: any = {};
+    if (blockedIds.length > 0) {
+      where.userId = { notIn: blockedIds };
+    }
+
+    // 2. 팔로잉 필터 처리
+    if (filter === 'following' && currentUserId) {
       const following = await prisma.follow.findMany({
         where: { followerId: currentUserId },
         select: { followingId: true },
       });
       const followingIds = following.map((f: any) => f.followingId);
-      where.userId = { in: followingIds };
+
+      // 차단된 유저 제외
+      const finalFollowingIds = followingIds.filter((id: string) => !blockedIds.includes(id));
+      where.userId = { in: finalFollowingIds };
     }
 
     // 2. 게시글 조회 (Reaction 포함)

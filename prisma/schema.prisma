@@ -26,7 +26,20 @@ model User {
   votes     Vote[]
   following Follow[] @relation("Following")
   followers Follow[] @relation("Followers")
+  blocks    Block[]  @relation("Blocks")
+  blockedBy Block[]  @relation("BlockedBy")
   notifications Notification[]
+}
+
+model Block {
+  id          Int      @id @default(autoincrement())
+  blockerId   String
+  blocker     User     @relation("Blocks", fields: [blockerId], references: [id])
+  blockedId   String
+  blocked     User     @relation("BlockedBy", fields: [blockedId], references: [id])
+  createdAt   DateTime @default(now())
+
+  @@unique([blockerId, blockedId])
 }
 
 model Post {
