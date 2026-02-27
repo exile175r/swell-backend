@@ -8,6 +8,7 @@ import aiRoutes from './routes/ai.routes';
 import commentRoutes from './routes/comment.routes';
 import userRoutes from './routes/user.routes';
 import notificationRoutes from './routes/notification.routes';
+import reportRoutes from './routes/report.routes';
 import { setupSwagger } from './utils/swagger';
 
 dotenv.config();
@@ -38,6 +39,7 @@ app.use('/api/stt', aiRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/reports', reportRoutes);
 
 // Basic Health Check
 app.get('/health', (req: Request, res: Response) => {

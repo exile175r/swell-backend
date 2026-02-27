@@ -28,7 +28,24 @@ model User {
   followers Follow[] @relation("Followers")
   blocks    Block[]  @relation("Blocks")
   blockedBy Block[]  @relation("BlockedBy")
+  reportsMade     Report[] @relation("ReportedBy")
+  reportsReceived Report[] @relation("ReportsReceived")
   notifications Notification[]
+}
+
+model Report {
+  id              Int      @id @default(autoincrement())
+  targetType      String   // USER | POST | COMMENT
+  targetId        String
+  reporterId      String
+  reporter        User     @relation("ReportedBy", fields: [reporterId], references: [id])
+  reportedUserId  String
+  reportedUser    User     @relation("ReportsReceived", fields: [reportedUserId], references: [id])
+  category        String
+  reason          String?  @db.Text
+  status          String   @default("PENDING") // PENDING | RESOLVED | REJECTED
+  adminAction     String?  // WARNING | BAN_7 | BAN_PERMANENT | NONE
+  createdAt       DateTime @default(now())
 }
 
 model Block {
