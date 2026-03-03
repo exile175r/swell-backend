@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import prisma from '../services/prisma.service';
+import { filterContent, checkRateLimit, checkRepeatedChars } from '../utils/filter';
 
 /**
  * @swagger
@@ -43,9 +44,23 @@ export const createComment = async (req: Request, res: Response, next: NextFunct
       return res.status(401).json({ message: '인증되지 않은 사용자입니다.' });
     }
 
-    const comment = await prisma.comment.create({
+    // 도배 방지 체크 (1분 내 5개 제한)
+    if (!(await checkRateLimit(effectiveUserId, 'comment'))) {
+      return res.status(429).json({ message: '과도한 댓글 작성이 감지되었습니다. 잠시 후 다시 시도해주세요.' });
+    }
+
+    // 반복 문자 체크 (10회 이상 동일 문자)
+    if (checkRepeatedChars(content)) {
+      return res.status(400).json({ message: '부적절한 반복 문자가 포함되어 있습니다.' });
+    }
+
+    // 비속어 마스킹 처리
+    const maskedContent = await filterContent(content);
+
+    const comment = await (prisma as any).comment.create({
       data: {
         content,
+        maskedContent,
         postId,
         userId: effectiveUserId,
         parentId: parentId ? Number(parentId) : null,
@@ -66,7 +81,6 @@ export const createComment = async (req: Request, res: Response, next: NextFunct
         },
       });
     }
-
     res.status(201).json(comment);
   } catch (error) {
     next(error);
@@ -75,7 +89,56 @@ export const createComment = async (req: Request, res: Response, next: NextFunct
 
 /**
  * @swagger
+ * /api/posts/{id}/comments:
+ *   get:
+ *     summary: 게시글의 댓글 목록 조회
+ *     tags: [Comments]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: 댓글 목록 반환 성공
+ */
+export const getComments = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.params;
+    const postId = Number(id);
+    const currentUserId = req.user?.userId;
+
+    const comments = await prisma.comment.findMany({
+      where: { postId },
+      orderBy: { createdAt: 'asc' },
+      include: {
+        user: { select: { nickname: true } },
+      },
+    });
+
+    const formattedComments = comments.map((comment: any) => {
+      // 작성자 본인이면 원본 보임, 아니면 마스킹된 내용 보임
+      const contentToShow = (currentUserId === comment.userId)
+        ? comment.content
+        : (comment.maskedContent || comment.content);
+
+      return {
+        ...comment,
+        content: contentToShow,
+      };
+    });
+
+    res.status(200).json(formattedComments);
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * @swagger
  * /api/comments/{id}/like:
+// ... (rest of file)
  *   post:
  *     summary: 댓글 좋아요 토글
  *     tags: [Comments]

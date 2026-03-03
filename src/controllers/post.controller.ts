@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import prisma from '../services/prisma.service';
+import { filterContent, checkRateLimit, checkRepeatedChars } from '../utils/filter';
 
 /**
  * @swagger
@@ -87,11 +88,16 @@ export const getPosts = async (req: Request, res: Response, next: NextFunction) 
       const likes = post.reactions.filter((r: any) => r.type === 'like').length;
       const dislikes = post.reactions.filter((r: any) => r.type === 'dislike').length;
 
+      // 작성자 본인이면 원본 보임, 아니면 마스킹된 내용 보임
+      const contentToShow = (currentUserId === post.userId)
+        ? post.content
+        : (post.maskedContent || post.content);
+
       return {
         id: post.id,
         userId: post.userId,
         nickname: post.user.nickname,
-        content: post.content,
+        content: contentToShow,
         hasVote: post.hasVote,
         createdAt: post.createdAt,
         likes,
@@ -138,9 +144,23 @@ export const createPost = async (req: Request, res: Response, next: NextFunction
       return res.status(401).json({ message: '인증되지 않은 사용자입니다.' });
     }
 
-    const post = await prisma.post.create({
+    // 도배 방지 체크 (1분 내 5개 제한)
+    if (!(await checkRateLimit(effectiveUserId, 'post'))) {
+      return res.status(429).json({ message: '과도한 게시글 작성이 감지되었습니다. 잠시 후 다시 시도해주세요.' });
+    }
+
+    // 반복 문자 체크 (10회 이상 동일 문자)
+    if (checkRepeatedChars(content)) {
+      return res.status(400).json({ message: '부적절한 반복 문자가 포함되어 있습니다.' });
+    }
+
+    // 비속어 마스킹 처리
+    const maskedContent = await filterContent(content);
+
+    const post = await (prisma as any).post.create({
       data: {
         content,
+        maskedContent,
         hasVote: hasVote || false,
         userId: effectiveUserId,
       },
