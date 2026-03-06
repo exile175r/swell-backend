@@ -26,7 +26,9 @@ const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 export const socialLogin = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { provider, code, redirectUri, codeVerifier } = req.body;
-    console.log(`[Auth] socialLogin started for provider: ${provider}, Code mode.`);
+    console.log(`[Auth] socialLogin version: 2026-03-06-19:10`);
+    console.log(`[Auth] Raw Request Body:`, JSON.stringify(req.body, null, 2));
+    console.log(`[Auth] Extracted codeVerifier: ${codeVerifier ? 'PRESENT' : 'MISSING'}`);
     let { socialId, nickname, birthDate } = req.body;
 
     if (!provider) {
