@@ -138,7 +138,6 @@ export const getComments = async (req: Request, res: Response, next: NextFunctio
 /**
  * @swagger
  * /api/comments/{id}/like:
-// ... (rest of file)
  *   post:
  *     summary: 댓글 좋아요 토글
  *     tags: [Comments]
