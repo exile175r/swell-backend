@@ -20,14 +20,30 @@ const router = Router();
  *               provider:
  *                 type: string
  *                 description: "소셜 제공자 (예: kakao, google)"
- *               accessToken:
+ *               code:
  *                 type: string
- *                 description: "프론트엔드 모바일에서 발급받은 실제 소셜 토큰 (구글: id_token, 카카오: access_token)"
+ *                 description: "프론트엔드 모바일에서 발급받은 인가 코드 (Code)"
+ *               redirectUri:
+ *                 type: string
+ *                 description: "프론트엔드가 카카오/구글에 전달했던 바로 그 Redirect URI (Proxy 검증용)"
+ *               codeVerifier:
+ *                 type: string
+ *                 description: "구글 PKCE 검증기 (선택 사항)"
  *     responses:
  *       200:
  *         description: 로그인 성공 및 JWT 발급
  */
 router.post('/social', authController.socialLogin);
+
+/**
+ * @swagger
+ * /api/auth/proxy:
+ *   get:
+ *     summary: 소셜 로그인 모바일 앱 딥링크 라우팅용 프록시 (HTTPS 전용 한계 돌파)
+ *     tags: [Auth]
+ *     description: 브라우저에서 카카오/구글 로그인 승인 후 이 API로 콜백되면, 원래 앱(swell://oauth)으로 파라미터를 유지한 채 튕겨주는 역할입니다.
+ */
+router.get('/proxy', authController.authProxy);
 
 /**
  * @swagger
