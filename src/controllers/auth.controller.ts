@@ -51,6 +51,7 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
             params: {
               grant_type: 'authorization_code',
               client_id: process.env.KAKAO_REST_API_KEY?.trim(),
+              client_secret: process.env.KAKAO_CLIENT_SECRET?.trim(), // 보안 설정 대비 추가
               redirect_uri: redirectUri,
               code: code,
             },
