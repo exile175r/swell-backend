@@ -49,14 +49,14 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
           client_secret: process.env.KAKAO_CLIENT_SECRET?.trim(),
           redirect_uri: redirectUri,
           code: code,
+          code_verifier: codeVerifier, // PKCE 필수 필드 추가
         };
         console.log(`[Auth] Kakao exchange attempt with payload:`, JSON.stringify(payload, null, 2));
 
         const tokenResponse = await axios.post(
           'https://kauth.kakao.com/oauth/token',
-          null,
+          new URLSearchParams(payload as any).toString(), // Form Data 형식 권장
           {
-            params: payload,
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
             },
