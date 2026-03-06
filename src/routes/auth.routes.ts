@@ -20,15 +20,9 @@ const router = Router();
  *               provider:
  *                 type: string
  *                 description: "소셜 제공자 (예: kakao, google)"
- *               code:
+ *               accessToken:
  *                 type: string
- *                 description: "프론트엔드에서 발급받은 인가 코드 (Authorization Code)"
- *               redirectUri:
- *                 type: string
- *                 description: "토큰 교환 시 사용할 리다이렉트 URI"
- *               codeVerifier:
- *                 type: string
- *                 description: "PKCE 적용 시 코드 검증기 (선택)"
+ *                 description: "프론트엔드 모바일에서 발급받은 실제 소셜 토큰 (구글: id_token, 카카오: access_token)"
  *     responses:
  *       200:
  *         description: 로그인 성공 및 JWT 발급

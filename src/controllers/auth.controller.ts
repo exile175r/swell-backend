@@ -12,85 +12,27 @@ const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
  */
 export const socialLogin = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { provider, code, codeVerifier } = req.body;
-    console.log(`[Auth] socialLogin started for provider: ${provider}, PKCE: ${!!codeVerifier}`);
+    const { provider, accessToken } = req.body;
+    console.log(`[Auth] socialLogin started for provider: ${provider}, Token mode.`);
     let { socialId, nickname, birthDate } = req.body;
 
     if (!provider) {
       return res.status(400).json({ message: 'provider는 필수입니다.' });
     }
 
+    if (!accessToken) {
+      return res.status(400).json({ message: '인가 토큰(accessToken / idToken)이 필수입니다.' });
+    }
+
     // 1. 카카오인 경우
     if (provider === 'kakao') {
-      console.log('[Auth] Processing Kakao Login...');
-      if (!code) {
-        return res.status(400).json({ message: '카카오 로그인에는 인가 코드가 필수입니다.' });
-      }
-
-      let realToken = code;
-
-      try {
-        const apiKey = process.env.KAKAO_REST_API_KEY?.trim();
-        const clientSecret = process.env.KAKAO_CLIENT_SECRET?.trim();
-
-        if (!apiKey) {
-          console.error('[Auth] Kakao API Key is missing');
-          return res.status(500).json({
-            success: false,
-            message: '서버 환경 설정(Kakao API Key)이 누락되었습니다.',
-          });
-        }
-
-        const targetRedirectUri = req.body.redirectUri || 'https://swell-backend.onrender.com/api/auth/callback';
-        console.log(`[Auth] Exchanging Kakao Code for Token. PKCE: ${!!codeVerifier}`);
-
-        const exchangeToken = async (useSecret: boolean) => {
-          const payload: any = new URLSearchParams({
-            grant_type: 'authorization_code',
-            client_id: apiKey,
-            redirect_uri: targetRedirectUri,
-            code: code,
-          });
-          if (useSecret && clientSecret) payload.append('client_secret', clientSecret);
-          if (codeVerifier) payload.append('code_verifier', codeVerifier);
-
-          return axios.post('https://kauth.kakao.com/oauth/token', payload.toString(), {
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' },
-          });
-        };
-
-        try {
-          // 1차 시도: Secret 포함 (있다면)
-          const tokenResponse = await exchangeToken(true);
-          realToken = tokenResponse.data.access_token;
-        } catch (firstError: any) {
-          const firstErrData = firstError.response?.data;
-          // KOE010 (Bad client credentials) 발생 시 Secret 없이 재시도
-          if (firstErrData?.error_code === 'KOE010') {
-            console.log('[Auth] Kakao KOE010 detected. Retrying without client_secret...');
-            const tokenResponse = await exchangeToken(false);
-            realToken = tokenResponse.data.access_token;
-          } else {
-            throw firstError;
-          }
-        }
-
-        console.log('[Auth] Kakao Token Exchange Success');
-      } catch (error: any) {
-        const errorDetail = error.response?.data || error.message;
-        console.error('[Kakao Token Exchange Error]', errorDetail);
-        return res.status(401).json({
-          success: false,
-          message: '카카오 토큰 교환에 실패했습니다.',
-          error: errorDetail
-        });
-      }
+      console.log('[Auth] Processing Kakao Login with direct accessToken...');
 
       try {
         console.log('[Auth] Fetching Kakao User Info...');
         const kakaoResponse = await axios.get('https://kapi.kakao.com/v2/user/me', {
           headers: {
-            Authorization: `Bearer ${realToken}`,
+            Authorization: `Bearer ${accessToken}`,
             'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
           },
         });
@@ -108,54 +50,14 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
         return res.status(401).json({ message: '유효하지 않은 카카오 토큰입니다.', error: (error as any).message });
       }
     }
-
     // 2. 구글인 경우
-    if (provider === 'google') {
-      console.log('[Auth] Processing Google Login...');
-      if (!code) {
-        return res.status(400).json({ message: '구글 로그인에는 인가 코드가 필수입니다.' });
-      }
-
-      let idToken = code;
-
-      try {
-        const clientId = process.env.GOOGLE_CLIENT_ID?.trim();
-        const clientSecret = process.env.GOOGLE_CLIENT_SECRET?.trim();
-
-        if (!clientId || !clientSecret) {
-          console.error('[Auth] Google Client ID or Secret is missing in Environment Variables');
-          return res.status(500).json({
-            success: false,
-            message: '서버 환경 설정(Google Client ID/Secret)이 누락되었습니다.',
-            details: { clientId: !!clientId, clientSecret: !!clientSecret }
-          });
-        }
-
-        console.log(`[Auth] Exchanging Google Code for Token. PKCE: ${!!codeVerifier}`);
-        const tokenResponse = await axios.post('https://oauth2.googleapis.com/token', {
-          code: code,
-          client_id: clientId,
-          client_secret: clientSecret,
-          redirect_uri: req.body.redirectUri || 'https://swell-backend.onrender.com/api/auth/callback',
-          grant_type: 'authorization_code',
-          code_verifier: codeVerifier,
-        });
-        idToken = tokenResponse.data.id_token;
-        console.log('[Auth] Google Token Exchange Success');
-      } catch (error: any) {
-        const errorDetail = error.response?.data || error.message;
-        console.error('[Google Token Exchange Error]', errorDetail);
-        return res.status(401).json({
-          success: false,
-          message: '구글 토큰 교환에 실패했습니다.',
-          error: errorDetail
-        });
-      }
+    else if (provider === 'google') {
+      console.log('[Auth] Processing Google Login with direct idToken...');
 
       try {
         console.log('[Auth] Verifying Google ID Token...');
         const ticket = await googleClient.verifyIdToken({
-          idToken: idToken,
+          idToken: accessToken,
           audience: process.env.GOOGLE_CLIENT_ID,
         });
 
@@ -166,10 +68,12 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
 
         socialId = payload.sub; // 구글 고유 ID
         nickname = payload.name || nickname;
-        // 구글은 기본적으로 생년월일을 주지 않으므로, 요청 페이로드의 birthDate를 유지하거나 나중에 입력받음
+        console.log(`[Auth] Google User Info Fetched: ${socialId}`);
       } catch (error) {
         return res.status(401).json({ message: '유효하지 않은 구글 토큰입니다.', error: (error as any).message });
       }
+    } else {
+      return res.status(400).json({ message: '지원하지 않는 소셜 플랫폼입니다.' });
     }
 
     if (!socialId) {
