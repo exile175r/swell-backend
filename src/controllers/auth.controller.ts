@@ -43,27 +43,34 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
     // 1. 카카오인 경우
     if (provider === 'kakao') {
       try {
-        console.log(`[Auth] Requesting Kakao Token with Redirect URI: ${redirectUri}`);
+        const payload = {
+          grant_type: 'authorization_code',
+          client_id: process.env.KAKAO_REST_API_KEY?.trim(),
+          client_secret: process.env.KAKAO_CLIENT_SECRET?.trim(),
+          redirect_uri: redirectUri,
+          code: code,
+        };
+        console.log(`[Auth] Kakao exchange attempt with payload:`, JSON.stringify(payload, null, 2));
+
         const tokenResponse = await axios.post(
           'https://kauth.kakao.com/oauth/token',
           null,
           {
-            params: {
-              grant_type: 'authorization_code',
-              client_id: process.env.KAKAO_REST_API_KEY?.trim(),
-              client_secret: process.env.KAKAO_CLIENT_SECRET?.trim(), // 보안 설정 대비 추가
-              redirect_uri: redirectUri,
-              code: code,
-            },
+            params: payload,
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
             },
           }
         );
         accessToken = tokenResponse.data.access_token;
+        console.log('[Auth] Kakao token exchange success');
       } catch (error: any) {
-        console.error('[Kakao Token Error]', error.response?.data || error.message);
-        return res.status(401).json({ message: '카카오 인증 코드가 유효하지 않습니다.', error: error.response?.data });
+        console.error('[Kakao Token Error] Full Response:', error.response?.data);
+        return res.status(401).json({
+          message: '카카오 인증 코드가 유효하지 않습니다.',
+          error: error.response?.data,
+          sentRedirectUri: redirectUri
+        });
       }
 
       try {
@@ -89,19 +96,26 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
     // 2. 구글인 경우
     else if (provider === 'google') {
       try {
-        console.log(`[Auth] Requesting Google Token with Redirect URI: ${redirectUri}`);
-        const tokenResponse = await axios.post('https://oauth2.googleapis.com/token', {
+        const payload = {
           client_id: process.env.GOOGLE_CLIENT_ID?.trim(),
           client_secret: process.env.GOOGLE_CLIENT_SECRET?.trim(),
           code,
           grant_type: 'authorization_code',
           redirect_uri: redirectUri,
-          code_verifier: codeVerifier, // PKCE 검증기 필수 (Option 3/4)
-        });
+          code_verifier: codeVerifier,
+        };
+        console.log(`[Auth] Google exchange attempt with payload:`, JSON.stringify(payload, null, 2));
+
+        const tokenResponse = await axios.post('https://oauth2.googleapis.com/token', payload);
         idToken = tokenResponse.data.id_token;
+        console.log('[Auth] Google token exchange success');
       } catch (error: any) {
-        console.error('[Google Token Error]', error.response?.data || error.message);
-        return res.status(401).json({ message: '구글 인증 코드가 유효하지 않습니다.', error: error.response?.data });
+        console.error('[Google Token Error] Full Response:', error.response?.data);
+        return res.status(401).json({
+          message: '구글 인증 코드가 유효하지 않습니다.',
+          error: error.response?.data,
+          sentRedirectUri: redirectUri
+        });
       }
 
       try {
