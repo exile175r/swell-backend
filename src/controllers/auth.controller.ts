@@ -39,6 +39,15 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
       return res.status(400).json({ message: '인가 코드(code)가 필수입니다.' });
     }
 
+    // [Bulletproof] PKCE가 필요한 경우 codeVerifier가 비어있으면 즉시 에러 반환
+    if ((provider === 'kakao' || provider === 'google') && !codeVerifier) {
+      console.error(`[Auth Error] ${provider} requires codeVerifier but received none.`);
+      return res.status(400).json({
+        message: '암호키(codeVerifier)가 누락되었습니다. 앱을 최신 버전으로 새로고침해주세요.',
+        receivedKeys: Object.keys(req.body)
+      });
+    }
+
     let accessToken = "";
     let idToken = "";
 
