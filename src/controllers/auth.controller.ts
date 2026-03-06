@@ -12,7 +12,7 @@ const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
  */
 export const socialLogin = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { provider, accessToken, codeVerifier } = req.body;
+    const { provider, code, codeVerifier } = req.body;
     console.log(`[Auth] socialLogin started for provider: ${provider}, PKCE: ${!!codeVerifier}`);
     let { socialId, nickname, birthDate } = req.body;
 
@@ -23,11 +23,11 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
     // 1. 카카오인 경우
     if (provider === 'kakao') {
       console.log('[Auth] Processing Kakao Login...');
-      if (!accessToken) {
+      if (!code) {
         return res.status(400).json({ message: '카카오 로그인에는 인가 코드가 필수입니다.' });
       }
 
-      let realToken = accessToken;
+      let realToken = code;
 
       try {
         const apiKey = process.env.KAKAO_REST_API_KEY?.trim();
@@ -49,7 +49,7 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
             grant_type: 'authorization_code',
             client_id: apiKey,
             redirect_uri: targetRedirectUri,
-            code: accessToken,
+            code: code,
           });
           if (useSecret && clientSecret) payload.append('client_secret', clientSecret);
           if (codeVerifier) payload.append('code_verifier', codeVerifier);
@@ -112,11 +112,11 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
     // 2. 구글인 경우
     if (provider === 'google') {
       console.log('[Auth] Processing Google Login...');
-      if (!accessToken) {
+      if (!code) {
         return res.status(400).json({ message: '구글 로그인에는 인가 코드가 필수입니다.' });
       }
 
-      let idToken = accessToken;
+      let idToken = code;
 
       try {
         const clientId = process.env.GOOGLE_CLIENT_ID?.trim();
@@ -133,7 +133,7 @@ export const socialLogin = async (req: Request, res: Response, next: NextFunctio
 
         console.log(`[Auth] Exchanging Google Code for Token. PKCE: ${!!codeVerifier}`);
         const tokenResponse = await axios.post('https://oauth2.googleapis.com/token', {
-          code: accessToken,
+          code: code,
           client_id: clientId,
           client_secret: clientSecret,
           redirect_uri: req.body.redirectUri || 'https://swell-backend.onrender.com/api/auth/callback',
