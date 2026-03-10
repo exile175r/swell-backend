@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { likeComment } from '../controllers/comment.controller';
+import { likeComment, deleteComment } from '../controllers/comment.controller';
 import { authenticate } from '../middlewares/auth.middleware';
 
 const router = Router();
@@ -7,5 +7,6 @@ const router = Router();
 // Notice: createComment is usually called via /posts/:id/comments (in post.routes.ts)
 // But likeComment is called directly on comment ID
 router.post('/:id/like', authenticate, likeComment);
+router.delete('/:id', authenticate, deleteComment);
 
 export default router;

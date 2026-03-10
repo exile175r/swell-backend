@@ -177,3 +177,105 @@ export const createPost = async (req: Request, res: Response, next: NextFunction
     next(error);
   }
 };
+
+/**
+ * @swagger
+ * /api/posts/{id}:
+ *   put:
+ *     summary: 게시글 수정
+ *     tags: [Posts]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               content:
+ *                 type: string
+ *               title:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: 게시글 수정 성공
+ */
+export const updatePost = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id: postIdStr } = req.params;
+    const { content, title } = req.body;
+    const postId = Number(postIdStr);
+    const userId = req.user?.userId;
+
+    if (!userId) {
+      return res.status(401).json({ message: '인증되지 않은 사용자입니다.' });
+    }
+
+    const post = await prisma.post.findUnique({ where: { id: postId } });
+    if (!post) {
+      return res.status(404).json({ message: '게시글을 찾을 수 없습니다.' });
+    }
+
+    if (post.userId !== userId) {
+      return res.status(403).json({ message: '수정 권한이 없습니다.' });
+    }
+
+    const maskedContent = await filterContent(content);
+
+    const updatedPost = await prisma.post.update({
+      where: { id: postId },
+      data: { content, maskedContent },
+    });
+
+    res.status(200).json(updatedPost);
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * @swagger
+ * /api/posts/{id}:
+ *   delete:
+ *     summary: 게시글 삭제
+ *     tags: [Posts]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: 게시글 삭제 성공
+ */
+export const deletePost = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id: postIdStr } = req.params;
+    const postId = Number(postIdStr);
+    const userId = req.user?.userId;
+
+    if (!userId) {
+      return res.status(401).json({ message: '인증되지 않은 사용자입니다.' });
+    }
+
+    const post = await prisma.post.findUnique({ where: { id: postId } });
+    if (!post) {
+      return res.status(404).json({ message: '게시글을 찾을 수 없습니다.' });
+    }
+
+    if (post.userId !== userId) {
+      return res.status(403).json({ message: '삭제 권한이 없습니다.' });
+    }
+
+    await prisma.post.delete({ where: { id: postId } });
+    res.status(200).json({ success: true, message: '게시글이 삭제되었습니다.' });
+  } catch (error) {
+    next(error);
+  }
+};

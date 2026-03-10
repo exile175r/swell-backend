@@ -204,3 +204,45 @@ export const likeComment = async (req: Request, res: Response, next: NextFunctio
     next(error);
   }
 };
+
+/**
+ * @swagger
+ * /api/comments/{id}:
+ *   delete:
+ *     summary: 댓글 삭제
+ *     tags: [Comments]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: 댓글 삭제 성공
+ */
+export const deleteComment = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id: commentIdStr } = req.params;
+    const commentId = Number(commentIdStr);
+    const userId = req.user?.userId;
+
+    if (!userId) {
+      return res.status(401).json({ message: '인증되지 않은 사용자입니다.' });
+    }
+
+    const comment = await prisma.comment.findUnique({ where: { id: commentId } });
+    if (!comment) {
+      return res.status(404).json({ message: '댓글을 찾을 수 없습니다.' });
+    }
+
+    if (comment.userId !== userId) {
+      return res.status(403).json({ message: '삭제 권한이 없습니다.' });
+    }
+
+    await prisma.comment.delete({ where: { id: commentId } });
+    res.status(200).json({ success: true, message: '댓글이 삭제되었습니다.' });
+  } catch (error) {
+    next(error);
+  }
+};

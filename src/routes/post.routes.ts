@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getPosts, createPost } from '../controllers/post.controller';
+import { getPosts, createPost, updatePost, deletePost } from '../controllers/post.controller';
 import { reactToPost, votePost } from '../controllers/interaction.controller';
 import { createComment, getComments } from '../controllers/comment.controller';
 import { authenticate, requireAdult } from '../middlewares/auth.middleware';
@@ -12,5 +12,8 @@ router.post('/:id/reaction', authenticate, reactToPost);
 router.post('/:id/vote', authenticate, votePost);
 router.get('/:id/comments', authenticate, getComments);
 router.post('/:id/comments', authenticate, createComment);
+
+router.put('/:id', authenticate, updatePost);
+router.delete('/:id', authenticate, deletePost);
 
 export default router;
