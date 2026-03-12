@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 // Request Logger
 app.use((req: Request, res: Response, next: NextFunction) => {
   console.log(`[Incoming Request] ${req.method} ${req.url}`);
-  if (req.method === 'POST') {
+  if (req.method === 'POST' && req.body) {
     console.log('[Request Body Keys]', Object.keys(req.body));
   }
   next();
